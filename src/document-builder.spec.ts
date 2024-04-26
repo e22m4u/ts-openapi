@@ -17,26 +17,26 @@ const DUMMY_DOC = {
   info: {title: 'Test document'},
 };
 
-describe('OADocumentBuilder', function() {
-  describe('constructor', function() {
-    it('uses a copy of the given document as the initial schema', function() {
+describe('OADocumentBuilder', function () {
+  describe('constructor', function () {
+    it('uses a copy of the given document as the initial schema', function () {
       const builder = new OADocumentBuilder(DUMMY_DOC);
       const res = builder['doc'];
       expect(res).to.be.eql(DUMMY_DOC);
       expect(res).to.be.not.eq(DUMMY_DOC);
     });
 
-    it('ignores a provided openapi version', function() {
+    it('ignores a provided openapi version', function () {
       const doc = {...DUMMY_DOC, openapi: '1.2.3'};
       const builder = new OADocumentBuilder(doc);
       const res = builder['doc'];
       expect(res).to.be.eql(DUMMY_DOC);
       expect(res).to.be.not.eq(DUMMY_DOC);
-    })
+    });
   });
 
-  describe('build', function() {
-    it('returns the copy of the document', function() {
+  describe('build', function () {
+    it('returns the copy of the document', function () {
       const builder = new OADocumentBuilder(DUMMY_DOC);
       const res = builder.build();
       expect(res).to.be.eql(DUMMY_DOC);
@@ -44,9 +44,9 @@ describe('OADocumentBuilder', function() {
     });
   });
 
-  describe('useClassMetadata', function() {
-    describe('tag', function() {
-      it('adds the tag object by the class metadata', function() {
+  describe('useClassMetadata', function () {
+    describe('tag', function () {
+      it('adds the tag object by the class metadata', function () {
         @OATag({name: 'Tag'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
@@ -54,13 +54,11 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'Tag'},
-          ],
-        })
+          tags: [{name: 'Tag'}],
+        });
       });
 
-      it('uses the class name as the tag name', function() {
+      it('uses the class name as the tag name', function () {
         @OATag()
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
@@ -68,13 +66,11 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'Target'},
-          ],
-        })
+          tags: [{name: 'Target'}],
+        });
       });
 
-      it('ignores the "Controller" postfix of the class name', function() {
+      it('ignores the "Controller" postfix of the class name', function () {
         @OATag()
         class UserController {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
@@ -82,13 +78,11 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'User'},
-          ],
-        })
+          tags: [{name: 'User'}],
+        });
       });
 
-      it('does not ignore the "Controller" postfix of the tag name that defined explicitly', function() {
+      it('does not ignore the "Controller" postfix of the tag name that defined explicitly', function () {
         @OATag({name: 'UserController'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
@@ -96,13 +90,11 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'UserController'},
-          ],
-        })
+          tags: [{name: 'UserController'}],
+        });
       });
 
-      it('does not add the "path" option from the tag metadata', function() {
+      it('does not add the "path" option from the tag metadata', function () {
         @OATag({name: 'Tag', path: '/path'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
@@ -110,20 +102,18 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'Tag'},
-          ],
-        })
+          tags: [{name: 'Tag'}],
+        });
       });
     });
 
-    describe('operation', function() {
-      it('adds the operation object by the class metadata', function() {
+    describe('operation', function () {
+      it('adds the operation object by the class metadata', function () {
         class Target {
           @OAOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
-            summary: 'Operation summary'
+            summary: 'Operation summary',
           })
           operation() {
             /**/
@@ -144,13 +134,13 @@ describe('OADocumentBuilder', function() {
         });
       });
 
-      it('adds the target tag to the operation object', function() {
+      it('adds the target tag to the operation object', function () {
         @OATag()
         class Target {
           @OAOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
-            summary: 'Operation summary'
+            summary: 'Operation summary',
           })
           operation() {
             /**/
@@ -161,9 +151,7 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'Target'},
-          ],
+          tags: [{name: 'Target'}],
           paths: {
             '/operation': {
               get: {
@@ -175,13 +163,13 @@ describe('OADocumentBuilder', function() {
         });
       });
 
-      it('uses the tag path as the operation path prefix', function() {
+      it('uses the tag path as the operation path prefix', function () {
         @OATag({path: '/tag'})
         class Target {
           @OAOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
-            summary: 'Operation summary'
+            summary: 'Operation summary',
           })
           operation() {
             /**/
@@ -192,9 +180,7 @@ describe('OADocumentBuilder', function() {
         const res = builder.build();
         expect(res).to.be.eql({
           ...DUMMY_DOC,
-          tags: [
-            {name: 'Target'},
-          ],
+          tags: [{name: 'Target'}],
           paths: {
             '/tag/operation': {
               get: {
@@ -207,9 +193,9 @@ describe('OADocumentBuilder', function() {
       });
     });
 
-    describe('parameter', function() {
+    describe('parameter', function () {
       describe('decorator applied to an instance method', () => {
-        it('ignores parameters metadata if no operation declared', function() {
+        it('ignores parameters metadata if no operation declared', function () {
           class Target {
             @OAParameter({
               name: 'param1',
@@ -231,12 +217,12 @@ describe('OADocumentBuilder', function() {
           expect(res).to.be.eql(DUMMY_DOC);
         });
 
-        it('adds declared parameters to the operation object', function() {
+        it('adds declared parameters to the operation object', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
-              summary: 'Operation summary'
+              summary: 'Operation summary',
             })
             @OAParameter({
               name: 'param1',
@@ -280,23 +266,21 @@ describe('OADocumentBuilder', function() {
         });
       });
 
-      describe('decorator applied to an instance method parameter', function() {
-        it('ignores parameters metadata if no operation declared', function() {
+      describe('decorator applied to an instance method parameter', function () {
+        it('ignores parameters metadata if no operation declared', function () {
           class Target {
             operation(
               @OAParameter({
                 name: 'param1',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.STRING},
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
               @OAParameter({
                 name: 'param2',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.NUMBER},
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param2: number,
             ) {
               /**/
@@ -308,27 +292,25 @@ describe('OADocumentBuilder', function() {
           expect(res).to.be.eql(DUMMY_DOC);
         });
 
-        it('adds declared parameters to the operation object', function() {
+        it('adds declared parameters to the operation object', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
-              summary: 'Operation summary'
+              summary: 'Operation summary',
             })
             operation(
               @OAParameter({
                 name: 'param1',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.STRING},
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
               @OAParameter({
                 name: 'param2',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.NUMBER},
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param2: number,
             ) {
               /**/
@@ -363,9 +345,9 @@ describe('OADocumentBuilder', function() {
       });
     });
 
-    describe('request body', function() {
+    describe('request body', function () {
       describe('decorator applied to an instance method', () => {
-        it('ignores request body metadata if no operation declared', function() {
+        it('ignores request body metadata if no operation declared', function () {
           class Target {
             @OARequestBody({
               mediaType: OAMediaType.JSON,
@@ -391,12 +373,12 @@ describe('OADocumentBuilder', function() {
           expect(res).to.be.eql(DUMMY_DOC);
         });
 
-        it('adds declared request body to the operation object', function() {
+        it('adds declared request body to the operation object', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
-              summary: 'Operation summary'
+              summary: 'Operation summary',
             })
             @OARequestBody({
               mediaType: OAMediaType.JSON,
@@ -446,8 +428,8 @@ describe('OADocumentBuilder', function() {
         });
       });
 
-      describe('decorator applied to an instance method parameter', function() {
-        it('ignores request body metadata if no operation declared', function() {
+      describe('decorator applied to an instance method parameter', function () {
+        it('ignores request body metadata if no operation declared', function () {
           class Target {
             operation(
               @OARequestBody({
@@ -456,8 +438,7 @@ describe('OADocumentBuilder', function() {
                 schema: {type: OADataType.OBJECT},
                 example: {foo: 'bar'},
                 required: true,
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
               @OARequestBody({
                 mediaType: OAMediaType.XML,
@@ -465,8 +446,7 @@ describe('OADocumentBuilder', function() {
                 schema: {type: OADataType.OBJECT},
                 example: {bar: 'baz'},
                 required: true,
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               xmlBody: object,
             ) {
               /**/
@@ -478,12 +458,12 @@ describe('OADocumentBuilder', function() {
           expect(res).to.be.eql(DUMMY_DOC);
         });
 
-        it('adds declared request body to the operation object', function() {
+        it('adds declared request body to the operation object', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
-              summary: 'Operation summary'
+              summary: 'Operation summary',
             })
             operation(
               @OARequestBody({
@@ -492,8 +472,7 @@ describe('OADocumentBuilder', function() {
                 schema: {type: OADataType.OBJECT},
                 example: {foo: 'bar'},
                 required: true,
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
               @OARequestBody({
                 mediaType: OAMediaType.XML,
@@ -501,8 +480,7 @@ describe('OADocumentBuilder', function() {
                 schema: {type: OADataType.OBJECT},
                 example: {bar: 'baz'},
                 required: true,
-              })
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               xmlBody: object,
             ) {
               /**/
@@ -539,8 +517,8 @@ describe('OADocumentBuilder', function() {
       });
     });
 
-    describe('response', function() {
-      it('ignores response metadata if no operation declared', function() {
+    describe('response', function () {
+      it('ignores response metadata if no operation declared', function () {
         class Target {
           @OAResponse({
             statusCode: 200,
@@ -566,12 +544,12 @@ describe('OADocumentBuilder', function() {
         expect(res).to.be.eql(DUMMY_DOC);
       });
 
-      it('adds declared response to the operation object', function() {
+      it('adds declared response to the operation object', function () {
         class Target {
           @OAOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
-            summary: 'Operation summary'
+            summary: 'Operation summary',
           })
           @OAResponse({
             statusCode: 200,
@@ -623,60 +601,3 @@ describe('OADocumentBuilder', function() {
     });
   });
 });
-
-type User = {
-  id: number,
-  name: string,
-  email: string,
-}
-
-@OATag({
-  name: 'User',
-  path: '/user',
-})
-class UserController {
-  @OAOperation({
-    method: OAOperationMethod.PATCH,
-    path: '/{id}',
-  })
-  @OAResponse({
-    mediaType: OAMediaType.JSON,
-    description: 'Patched User',
-    schema: {
-      type: OADataType.OBJECT,
-      properties: {
-        id: {type: OADataType.NUMBER},
-        name: {type: OADataType.STRING},
-        email: {type: OADataType.STRING},
-      },
-    },
-  })
-  patchById(
-    @OAParameter({
-      name: 'id',
-      in: OAParameterLocation.PATH,
-      schema: {type: OADataType.NUMBER},
-    })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    id: string,
-    @OARequestBody({
-      mediaType: OAMediaType.JSON,
-      schema: {
-        type: OADataType.OBJECT,
-        properties: {
-          name: {type: OADataType.STRING},
-          email: {type: OADataType.STRING},
-        },
-      },
-    })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    body: User,
-  ): User {
-    return {id: 10, name: 'John Doe', email: 'john@mail.com'};
-  }
-}
-
-const builder = new OADocumentBuilder({info: {title: 'My project'}});
-builder.useClassMetadata(UserController);
-const openApiDocument = builder.build();
-console.log(JSON.stringify(openApiDocument, null, 2));

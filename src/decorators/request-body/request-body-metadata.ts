@@ -22,4 +22,6 @@ export type OARequestBodiesMetadataMap = Map<string, OARequestBodyMetadata[]>;
  * Request body metadata key.
  */
 export const OA_REQUEST_BODIES_METADATA_KEY =
-  new MetadataKey<OARequestBodiesMetadataMap>('openApiRequestBodiesMetadataKey');
+  new MetadataKey<OARequestBodiesMetadataMap>(
+    'openApiRequestBodiesMetadataKey',
+  );

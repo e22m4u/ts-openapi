@@ -80,9 +80,8 @@ export class OADocumentBuilder {
         oaOperation.tags = oaOperation.tags ?? [];
         oaOperation.tags.push(tagName);
       }
-      const operationPath = path
-        .join('/', tagPath, operationMd.path)
-        .replace(/\/$/, '') || '/';
+      const operationPath =
+        path.join('/', tagPath, operationMd.path).replace(/\/$/, '') || '/';
       this.doc.paths = this.doc.paths ?? {};
       this.doc.paths[operationPath] = this.doc.paths[operationPath] ?? {};
       const oaPathItem = this.doc.paths[operationPath]!;
