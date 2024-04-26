@@ -224,7 +224,6 @@ import {
   OAParameter,
   OAMediaType,
   OARequestBody,
-  OADocumentBuilder,
   OAOperationMethod,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
@@ -283,11 +282,13 @@ class UserController {
 Create OpenApi Document by the class metadata.
 
 ```ts
+import {OADocumentBuilder} from '@e22m4u/ts-openapi';
+
 const builder = new OADocumentBuilder({info: {title: 'My project'}});
 builder.useClassMetadata(UserController);
-const openApiDocument = builder.build();
+const doc = builder.build();
 
-console.log(openApiDocument);
+console.log(doc);
 // {
 //   "openapi": "3.1.0",
 //   "info": {
