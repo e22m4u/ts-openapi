@@ -14,7 +14,10 @@ import {OAParameterLocation} from './document-types';
 const OPENAPI_VERSION = '3.1.0';
 const DUMMY_DOC = {
   openapi: OPENAPI_VERSION,
-  info: {title: 'Test document'},
+  info: {
+    title: 'Test document',
+    version: OPENAPI_VERSION,
+  },
 };
 
 describe('OADocumentBuilder', function () {
@@ -27,7 +30,9 @@ describe('OADocumentBuilder', function () {
     });
 
     it('ignores a provided openapi version', function () {
-      const doc = {...DUMMY_DOC, openapi: '1.2.3'};
+      const doc = JSON.parse(JSON.stringify(DUMMY_DOC));
+      doc.openapi = '1.2.3';
+      doc.info.version = '1.2.3';
       const builder = new OADocumentBuilder(doc);
       const res = builder['doc'];
       expect(res).to.be.eql(DUMMY_DOC);

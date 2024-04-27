@@ -34,7 +34,7 @@ export class OADocumentBuilder {
     // avoid argument mutation
     this.doc = cloneDeep({...doc, openapi: '3.1.0'});
     // force openapi version
-    delete this.doc.info.version;
+    this.doc.info.version = '3.1.0';
   }
 
   /**

@@ -27,7 +27,10 @@ const document_types_4 = require("./document-types");
 const OPENAPI_VERSION = '3.1.0';
 const DUMMY_DOC = {
     openapi: OPENAPI_VERSION,
-    info: { title: 'Test document' },
+    info: {
+        title: 'Test document',
+        version: OPENAPI_VERSION,
+    },
 };
 (0, mocha_1.describe)('OADocumentBuilder', function () {
     (0, mocha_1.describe)('constructor', function () {
@@ -38,7 +41,9 @@ const DUMMY_DOC = {
             (0, chai_1.expect)(res).to.be.not.eq(DUMMY_DOC);
         });
         it('ignores a provided openapi version', function () {
-            const doc = Object.assign(Object.assign({}, DUMMY_DOC), { openapi: '1.2.3' });
+            const doc = JSON.parse(JSON.stringify(DUMMY_DOC));
+            doc.openapi = '1.2.3';
+            doc.info.version = '1.2.3';
             const builder = new document_builder_1.OADocumentBuilder(doc);
             const res = builder['doc'];
             (0, chai_1.expect)(res).to.be.eql(DUMMY_DOC);

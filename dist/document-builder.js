@@ -25,7 +25,7 @@ class OADocumentBuilder {
         // avoid argument mutation
         this.doc = (0, utils_1.cloneDeep)(Object.assign(Object.assign({}, doc), { openapi: '3.1.0' }));
         // force openapi version
-        delete this.doc.info.version;
+        this.doc.info.version = '3.1.0';
     }
     /**
      * Returns the OADocumentObject.
