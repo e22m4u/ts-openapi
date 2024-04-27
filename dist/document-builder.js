@@ -11,6 +11,7 @@ const decorators_2 = require("./decorators");
 const decorators_3 = require("./decorators");
 const decorators_4 = require("./decorators");
 const decorators_5 = require("./decorators");
+const document_types_1 = require("./document-types");
 /**
  * Document builder.
  */
@@ -81,7 +82,8 @@ class OADocumentBuilder {
                 parametersMd.reverse().forEach(parameterMd => {
                     var _a;
                     oaOperation.parameters = (_a = oaOperation.parameters) !== null && _a !== void 0 ? _a : [];
-                    oaOperation.parameters.push(parameterMd);
+                    const required = parameterMd.in === document_types_1.OAParameterLocation.PATH || parameterMd.required;
+                    oaOperation.parameters.push(Object.assign(Object.assign({}, parameterMd), { required }));
                 });
             // request body
             const requestBodiesMdMap = decorators_5.OARequestBodyReflector.getMetadata(target);

@@ -22,8 +22,8 @@ const decorators_5 = require("./decorators");
 const document_types_1 = require("./document-types");
 const document_types_2 = require("./document-types");
 const document_types_3 = require("./document-types");
-const document_types_4 = require("./document-types");
 const document_builder_1 = require("./document-builder");
+const document_types_4 = require("./document-types");
 const OPENAPI_VERSION = '3.1.0';
 const DUMMY_DOC = {
     openapi: OPENAPI_VERSION,
@@ -213,12 +213,12 @@ const DUMMY_DOC = {
                     __decorate([
                         (0, decorators_4.OAParameter)({
                             name: 'param1',
-                            in: document_types_4.OAParameterLocation.PATH,
+                            in: document_types_4.OAParameterLocation.QUERY,
                             schema: { type: document_types_1.OADataType.STRING },
                         }),
                         (0, decorators_4.OAParameter)({
                             name: 'param2',
-                            in: document_types_4.OAParameterLocation.PATH,
+                            in: document_types_4.OAParameterLocation.QUERY,
                             schema: { type: document_types_1.OADataType.NUMBER },
                         }),
                         __metadata("design:type", Function),
@@ -231,6 +231,55 @@ const DUMMY_DOC = {
                     (0, chai_1.expect)(res).to.be.eql(DUMMY_DOC);
                 });
                 it('adds declared parameters to the operation object', function () {
+                    class Target {
+                        operation() {
+                            /**/
+                        }
+                    }
+                    __decorate([
+                        (0, decorators_3.OAOperation)({
+                            method: document_types_3.OAOperationMethod.GET,
+                            path: '/operation',
+                            summary: 'Operation summary',
+                        }),
+                        (0, decorators_4.OAParameter)({
+                            name: 'param1',
+                            in: document_types_4.OAParameterLocation.QUERY,
+                            schema: { type: document_types_1.OADataType.STRING },
+                        }),
+                        (0, decorators_4.OAParameter)({
+                            name: 'param2',
+                            in: document_types_4.OAParameterLocation.QUERY,
+                            schema: { type: document_types_1.OADataType.NUMBER },
+                        }),
+                        __metadata("design:type", Function),
+                        __metadata("design:paramtypes", []),
+                        __metadata("design:returntype", void 0)
+                    ], Target.prototype, "operation", null);
+                    const builder = new document_builder_1.OADocumentBuilder(DUMMY_DOC);
+                    builder.useClassMetadata(Target);
+                    const res = builder.build();
+                    (0, chai_1.expect)(res).to.be.eql(Object.assign(Object.assign({}, DUMMY_DOC), { paths: {
+                            '/operation': {
+                                get: {
+                                    summary: 'Operation summary',
+                                    parameters: [
+                                        {
+                                            name: 'param1',
+                                            in: document_types_4.OAParameterLocation.QUERY,
+                                            schema: { type: document_types_1.OADataType.STRING },
+                                        },
+                                        {
+                                            name: 'param2',
+                                            in: document_types_4.OAParameterLocation.QUERY,
+                                            schema: { type: document_types_1.OADataType.NUMBER },
+                                        },
+                                    ],
+                                },
+                            },
+                        } }));
+                });
+                it('makes path parameters required', function () {
                     class Target {
                         operation() {
                             /**/
@@ -268,11 +317,13 @@ const DUMMY_DOC = {
                                             name: 'param1',
                                             in: document_types_4.OAParameterLocation.PATH,
                                             schema: { type: document_types_1.OADataType.STRING },
+                                            required: true,
                                         },
                                         {
                                             name: 'param2',
                                             in: document_types_4.OAParameterLocation.PATH,
                                             schema: { type: document_types_1.OADataType.NUMBER },
+                                            required: true,
                                         },
                                     ],
                                 },
@@ -292,12 +343,12 @@ const DUMMY_DOC = {
                     __decorate([
                         __param(0, (0, decorators_4.OAParameter)({
                             name: 'param1',
-                            in: document_types_4.OAParameterLocation.PATH,
+                            in: document_types_4.OAParameterLocation.QUERY,
                             schema: { type: document_types_1.OADataType.STRING },
                         })),
                         __param(1, (0, decorators_4.OAParameter)({
                             name: 'param2',
-                            in: document_types_4.OAParameterLocation.PATH,
+                            in: document_types_4.OAParameterLocation.QUERY,
                             schema: { type: document_types_1.OADataType.NUMBER },
                         })),
                         __metadata("design:type", Function),
@@ -310,6 +361,57 @@ const DUMMY_DOC = {
                     (0, chai_1.expect)(res).to.be.eql(DUMMY_DOC);
                 });
                 it('adds declared parameters to the operation object', function () {
+                    class Target {
+                        operation(// eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        param1, // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        param2) {
+                            /**/
+                        }
+                    }
+                    __decorate([
+                        (0, decorators_3.OAOperation)({
+                            method: document_types_3.OAOperationMethod.GET,
+                            path: '/operation',
+                            summary: 'Operation summary',
+                        }),
+                        __param(0, (0, decorators_4.OAParameter)({
+                            name: 'param1',
+                            in: document_types_4.OAParameterLocation.QUERY,
+                            schema: { type: document_types_1.OADataType.STRING },
+                        })),
+                        __param(1, (0, decorators_4.OAParameter)({
+                            name: 'param2',
+                            in: document_types_4.OAParameterLocation.QUERY,
+                            schema: { type: document_types_1.OADataType.NUMBER },
+                        })),
+                        __metadata("design:type", Function),
+                        __metadata("design:paramtypes", [String, Number]),
+                        __metadata("design:returntype", void 0)
+                    ], Target.prototype, "operation", null);
+                    const builder = new document_builder_1.OADocumentBuilder(DUMMY_DOC);
+                    builder.useClassMetadata(Target);
+                    const res = builder.build();
+                    (0, chai_1.expect)(res).to.be.eql(Object.assign(Object.assign({}, DUMMY_DOC), { paths: {
+                            '/operation': {
+                                get: {
+                                    summary: 'Operation summary',
+                                    parameters: [
+                                        {
+                                            name: 'param1',
+                                            in: document_types_4.OAParameterLocation.QUERY,
+                                            schema: { type: document_types_1.OADataType.STRING },
+                                        },
+                                        {
+                                            name: 'param2',
+                                            in: document_types_4.OAParameterLocation.QUERY,
+                                            schema: { type: document_types_1.OADataType.NUMBER },
+                                        },
+                                    ],
+                                },
+                            },
+                        } }));
+                });
+                it('makes path parameters required', function () {
                     class Target {
                         operation(// eslint-disable-next-line @typescript-eslint/no-unused-vars
                         param1, // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -349,11 +451,13 @@ const DUMMY_DOC = {
                                             name: 'param1',
                                             in: document_types_4.OAParameterLocation.PATH,
                                             schema: { type: document_types_1.OADataType.STRING },
+                                            required: true,
                                         },
                                         {
                                             name: 'param2',
                                             in: document_types_4.OAParameterLocation.PATH,
                                             schema: { type: document_types_1.OADataType.NUMBER },
+                                            required: true,
                                         },
                                     ],
                                 },

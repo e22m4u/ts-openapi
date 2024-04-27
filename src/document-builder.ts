@@ -12,6 +12,7 @@ import {OAParameterReflector} from './decorators';
 import {OAOperationReflector} from './decorators';
 import {OARequestBodyReflector} from './decorators';
 import {OARequestBodyObject} from './document-types';
+import {OAParameterLocation} from './document-types';
 
 /**
  * Document builder.
@@ -92,7 +93,9 @@ export class OADocumentBuilder {
       if (parametersMd)
         parametersMd.reverse().forEach(parameterMd => {
           oaOperation.parameters = oaOperation.parameters ?? [];
-          oaOperation.parameters.push(parameterMd);
+          const required =
+            parameterMd.in === OAParameterLocation.PATH || parameterMd.required;
+          oaOperation.parameters.push({...parameterMd, required});
         });
       // request body
       const requestBodiesMdMap = OARequestBodyReflector.getMetadata(target);

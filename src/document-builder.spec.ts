@@ -8,8 +8,8 @@ import {OARequestBody} from './decorators';
 import {OADataType} from './document-types';
 import {OAMediaType} from './document-types';
 import {OAOperationMethod} from './document-types';
-import {OAParameterLocation} from './document-types';
 import {OADocumentBuilder} from './document-builder';
+import {OAParameterLocation} from './document-types';
 
 const OPENAPI_VERSION = '3.1.0';
 const DUMMY_DOC = {
@@ -199,12 +199,12 @@ describe('OADocumentBuilder', function () {
           class Target {
             @OAParameter({
               name: 'param1',
-              in: OAParameterLocation.PATH,
+              in: OAParameterLocation.QUERY,
               schema: {type: OADataType.STRING},
             })
             @OAParameter({
               name: 'param2',
-              in: OAParameterLocation.PATH,
+              in: OAParameterLocation.QUERY,
               schema: {type: OADataType.NUMBER},
             })
             operation() {
@@ -218,6 +218,54 @@ describe('OADocumentBuilder', function () {
         });
 
         it('adds declared parameters to the operation object', function () {
+          class Target {
+            @OAOperation({
+              method: OAOperationMethod.GET,
+              path: '/operation',
+              summary: 'Operation summary',
+            })
+            @OAParameter({
+              name: 'param1',
+              in: OAParameterLocation.QUERY,
+              schema: {type: OADataType.STRING},
+            })
+            @OAParameter({
+              name: 'param2',
+              in: OAParameterLocation.QUERY,
+              schema: {type: OADataType.NUMBER},
+            })
+            operation() {
+              /**/
+            }
+          }
+          const builder = new OADocumentBuilder(DUMMY_DOC);
+          builder.useClassMetadata(Target);
+          const res = builder.build();
+          expect(res).to.be.eql({
+            ...DUMMY_DOC,
+            paths: {
+              '/operation': {
+                get: {
+                  summary: 'Operation summary',
+                  parameters: [
+                    {
+                      name: 'param1',
+                      in: OAParameterLocation.QUERY,
+                      schema: {type: OADataType.STRING},
+                    },
+                    {
+                      name: 'param2',
+                      in: OAParameterLocation.QUERY,
+                      schema: {type: OADataType.NUMBER},
+                    },
+                  ],
+                },
+              },
+            },
+          });
+        });
+
+        it('makes path parameters required', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
@@ -252,11 +300,13 @@ describe('OADocumentBuilder', function () {
                       name: 'param1',
                       in: OAParameterLocation.PATH,
                       schema: {type: OADataType.STRING},
+                      required: true,
                     },
                     {
                       name: 'param2',
                       in: OAParameterLocation.PATH,
                       schema: {type: OADataType.NUMBER},
+                      required: true,
                     },
                   ],
                 },
@@ -272,13 +322,13 @@ describe('OADocumentBuilder', function () {
             operation(
               @OAParameter({
                 name: 'param1',
-                in: OAParameterLocation.PATH,
+                in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.STRING},
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
               @OAParameter({
                 name: 'param2',
-                in: OAParameterLocation.PATH,
+                in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.NUMBER},
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param2: number,
@@ -293,6 +343,57 @@ describe('OADocumentBuilder', function () {
         });
 
         it('adds declared parameters to the operation object', function () {
+          class Target {
+            @OAOperation({
+              method: OAOperationMethod.GET,
+              path: '/operation',
+              summary: 'Operation summary',
+            })
+            operation(
+              @OAParameter({
+                name: 'param1',
+                in: OAParameterLocation.QUERY,
+                schema: {type: OADataType.STRING},
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              param1: string,
+              @OAParameter({
+                name: 'param2',
+                in: OAParameterLocation.QUERY,
+                schema: {type: OADataType.NUMBER},
+              }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              param2: number,
+            ) {
+              /**/
+            }
+          }
+          const builder = new OADocumentBuilder(DUMMY_DOC);
+          builder.useClassMetadata(Target);
+          const res = builder.build();
+          expect(res).to.be.eql({
+            ...DUMMY_DOC,
+            paths: {
+              '/operation': {
+                get: {
+                  summary: 'Operation summary',
+                  parameters: [
+                    {
+                      name: 'param1',
+                      in: OAParameterLocation.QUERY,
+                      schema: {type: OADataType.STRING},
+                    },
+                    {
+                      name: 'param2',
+                      in: OAParameterLocation.QUERY,
+                      schema: {type: OADataType.NUMBER},
+                    },
+                  ],
+                },
+              },
+            },
+          });
+        });
+
+        it('makes path parameters required', function () {
           class Target {
             @OAOperation({
               method: OAOperationMethod.GET,
@@ -330,11 +431,13 @@ describe('OADocumentBuilder', function () {
                       name: 'param1',
                       in: OAParameterLocation.PATH,
                       schema: {type: OADataType.STRING},
+                      required: true,
                     },
                     {
                       name: 'param2',
                       in: OAParameterLocation.PATH,
                       schema: {type: OADataType.NUMBER},
+                      required: true,
                     },
                   ],
                 },
