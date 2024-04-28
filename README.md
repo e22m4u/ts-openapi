@@ -21,7 +21,7 @@ npm install @e22m4u/ts-openapi
 
 ## Example
 
-Decorators usage.
+Do use decorators to describe the schema.
 
 ```ts
 import {
