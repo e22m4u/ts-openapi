@@ -52,6 +52,7 @@ var OADataFormat;
     OADataFormat["FLOAT"] = "float";
     OADataFormat["DOUBLE"] = "double";
     OADataFormat["PASSWORD"] = "password";
+    OADataFormat["BINARY"] = "binary";
 })(OADataFormat || (exports.OADataFormat = OADataFormat = {}));
 /**
  * Media type.
@@ -59,10 +60,11 @@ var OADataFormat;
  */
 var OAMediaType;
 (function (OAMediaType) {
-    OAMediaType["TEXT"] = "text/plain";
-    OAMediaType["HTML"] = "html/plain";
-    OAMediaType["XML"] = "application/xml";
-    OAMediaType["JSON"] = "application/json";
+    OAMediaType["TEXT_PLAIN"] = "text/plain";
+    OAMediaType["TEXT_HTML"] = "text/html";
+    OAMediaType["APPLICATION_XML"] = "application/xml";
+    OAMediaType["APPLICATION_JSON"] = "application/json";
+    OAMediaType["MULTIPART_FORM_DATA"] = "multipart/form-data";
 })(OAMediaType || (exports.OAMediaType = OAMediaType = {}));
 /**
  * Security Scheme Type.

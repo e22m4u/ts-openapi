@@ -481,14 +481,14 @@ const DUMMY_DOC = {
                     }
                     __decorate([
                         (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.JSON,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         }),
                         (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.XML,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { bar: 'baz' },
@@ -516,14 +516,14 @@ const DUMMY_DOC = {
                             summary: 'Operation summary',
                         }),
                         (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.JSON,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         }),
                         (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.XML,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { bar: 'baz' },
@@ -543,11 +543,11 @@ const DUMMY_DOC = {
                                     requestBody: {
                                         description: 'Request body description',
                                         content: {
-                                            [document_types_2.OAMediaType.JSON]: {
+                                            [document_types_2.OAMediaType.APPLICATION_JSON]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { foo: 'bar' },
                                             },
-                                            [document_types_2.OAMediaType.XML]: {
+                                            [document_types_2.OAMediaType.APPLICATION_XML]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { bar: 'baz' },
                                             },
@@ -570,14 +570,14 @@ const DUMMY_DOC = {
                     }
                     __decorate([
                         __param(0, (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.JSON,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         })),
                         __param(1, (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.XML,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { bar: 'baz' },
@@ -607,14 +607,14 @@ const DUMMY_DOC = {
                             summary: 'Operation summary',
                         }),
                         __param(0, (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.JSON,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         })),
                         __param(1, (0, decorators_5.OARequestBody)({
-                            mediaType: document_types_2.OAMediaType.XML,
+                            mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: document_types_1.OADataType.OBJECT },
                             example: { bar: 'baz' },
@@ -634,11 +634,11 @@ const DUMMY_DOC = {
                                     requestBody: {
                                         description: 'Request body description',
                                         content: {
-                                            [document_types_2.OAMediaType.JSON]: {
+                                            [document_types_2.OAMediaType.APPLICATION_JSON]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { foo: 'bar' },
                                             },
-                                            [document_types_2.OAMediaType.XML]: {
+                                            [document_types_2.OAMediaType.APPLICATION_XML]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { bar: 'baz' },
                                             },
@@ -661,14 +661,14 @@ const DUMMY_DOC = {
                 __decorate([
                     (0, decorators_2.OAResponse)({
                         statusCode: 200,
-                        mediaType: document_types_2.OAMediaType.JSON,
+                        mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                         description: 'Response description',
                         schema: { type: document_types_1.OADataType.OBJECT },
                         example: { foo: 'bar' },
                     }),
                     (0, decorators_2.OAResponse)({
                         statusCode: 200,
-                        mediaType: document_types_2.OAMediaType.XML,
+                        mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                         description: 'Response description',
                         schema: { type: document_types_1.OADataType.OBJECT },
                         example: { bar: 'baz' },
@@ -696,14 +696,14 @@ const DUMMY_DOC = {
                     }),
                     (0, decorators_2.OAResponse)({
                         statusCode: 200,
-                        mediaType: document_types_2.OAMediaType.JSON,
+                        mediaType: document_types_2.OAMediaType.APPLICATION_JSON,
                         description: 'Response description',
                         schema: { type: document_types_1.OADataType.OBJECT },
                         example: { foo: 'bar' },
                     }),
                     (0, decorators_2.OAResponse)({
                         statusCode: 200,
-                        mediaType: document_types_2.OAMediaType.XML,
+                        mediaType: document_types_2.OAMediaType.APPLICATION_XML,
                         description: 'Response description',
                         schema: { type: document_types_1.OADataType.OBJECT },
                         example: { bar: 'baz' },
@@ -723,11 +723,11 @@ const DUMMY_DOC = {
                                     '200': {
                                         description: 'Response description',
                                         content: {
-                                            [document_types_2.OAMediaType.JSON]: {
+                                            [document_types_2.OAMediaType.APPLICATION_JSON]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { foo: 'bar' },
                                             },
-                                            [document_types_2.OAMediaType.XML]: {
+                                            [document_types_2.OAMediaType.APPLICATION_XML]: {
                                                 schema: { type: document_types_1.OADataType.OBJECT },
                                                 example: { bar: 'baz' },
                                             },

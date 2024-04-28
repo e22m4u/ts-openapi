@@ -181,7 +181,8 @@ export declare enum OADataFormat {
     INT64 = "int64",
     FLOAT = "float",
     DOUBLE = "double",
-    PASSWORD = "password"
+    PASSWORD = "password",
+    BINARY = "binary"
 }
 /**
  * Discriminator Object.
@@ -252,10 +253,11 @@ export type OARequestBodyObject = {
  * https://spec.openapis.org/oas/v3.1.0#media-types
  */
 export declare enum OAMediaType {
-    TEXT = "text/plain",
-    HTML = "html/plain",
-    XML = "application/xml",
-    JSON = "application/json"
+    TEXT_PLAIN = "text/plain",
+    TEXT_HTML = "text/html",
+    APPLICATION_XML = "application/xml",
+    APPLICATION_JSON = "application/json",
+    MULTIPART_FORM_DATA = "multipart/form-data"
 }
 /**
  * Responses Object.

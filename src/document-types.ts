@@ -198,6 +198,7 @@ export enum OADataFormat {
   FLOAT = 'float',
   DOUBLE = 'double',
   PASSWORD = 'password',
+  BINARY = 'binary',
 }
 
 /**
@@ -269,10 +270,11 @@ export type OARequestBodyObject = {
  * https://spec.openapis.org/oas/v3.1.0#media-types
  */
 export enum OAMediaType {
-  TEXT = 'text/plain',
-  HTML = 'html/plain',
-  XML = 'application/xml',
-  JSON = 'application/json',
+  TEXT_PLAIN = 'text/plain',
+  TEXT_HTML = 'text/html',
+  APPLICATION_XML = 'application/xml',
+  APPLICATION_JSON = 'application/json',
+  MULTIPART_FORM_DATA = 'multipart/form-data',
 }
 
 /**

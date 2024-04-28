@@ -458,14 +458,14 @@ describe('OADocumentBuilder', function () {
         it('ignores request body metadata if no operation declared', function () {
           class Target {
             @OARequestBody({
-              mediaType: OAMediaType.JSON,
+              mediaType: OAMediaType.APPLICATION_JSON,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {foo: 'bar'},
               required: true,
             })
             @OARequestBody({
-              mediaType: OAMediaType.XML,
+              mediaType: OAMediaType.APPLICATION_XML,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {bar: 'baz'},
@@ -489,14 +489,14 @@ describe('OADocumentBuilder', function () {
               summary: 'Operation summary',
             })
             @OARequestBody({
-              mediaType: OAMediaType.JSON,
+              mediaType: OAMediaType.APPLICATION_JSON,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {foo: 'bar'},
               required: true,
             })
             @OARequestBody({
-              mediaType: OAMediaType.XML,
+              mediaType: OAMediaType.APPLICATION_XML,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {bar: 'baz'},
@@ -518,11 +518,11 @@ describe('OADocumentBuilder', function () {
                   requestBody: {
                     description: 'Request body description',
                     content: {
-                      [OAMediaType.JSON]: {
+                      [OAMediaType.APPLICATION_JSON]: {
                         schema: {type: OADataType.OBJECT},
                         example: {foo: 'bar'},
                       },
-                      [OAMediaType.XML]: {
+                      [OAMediaType.APPLICATION_XML]: {
                         schema: {type: OADataType.OBJECT},
                         example: {bar: 'baz'},
                       },
@@ -541,7 +541,7 @@ describe('OADocumentBuilder', function () {
           class Target {
             operation(
               @OARequestBody({
-                mediaType: OAMediaType.JSON,
+                mediaType: OAMediaType.APPLICATION_JSON,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
                 example: {foo: 'bar'},
@@ -549,7 +549,7 @@ describe('OADocumentBuilder', function () {
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
               @OARequestBody({
-                mediaType: OAMediaType.XML,
+                mediaType: OAMediaType.APPLICATION_XML,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
                 example: {bar: 'baz'},
@@ -575,7 +575,7 @@ describe('OADocumentBuilder', function () {
             })
             operation(
               @OARequestBody({
-                mediaType: OAMediaType.JSON,
+                mediaType: OAMediaType.APPLICATION_JSON,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
                 example: {foo: 'bar'},
@@ -583,7 +583,7 @@ describe('OADocumentBuilder', function () {
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
               @OARequestBody({
-                mediaType: OAMediaType.XML,
+                mediaType: OAMediaType.APPLICATION_XML,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
                 example: {bar: 'baz'},
@@ -606,11 +606,11 @@ describe('OADocumentBuilder', function () {
                   requestBody: {
                     description: 'Request body description',
                     content: {
-                      [OAMediaType.JSON]: {
+                      [OAMediaType.APPLICATION_JSON]: {
                         schema: {type: OADataType.OBJECT},
                         example: {foo: 'bar'},
                       },
-                      [OAMediaType.XML]: {
+                      [OAMediaType.APPLICATION_XML]: {
                         schema: {type: OADataType.OBJECT},
                         example: {bar: 'baz'},
                       },
@@ -630,14 +630,14 @@ describe('OADocumentBuilder', function () {
         class Target {
           @OAResponse({
             statusCode: 200,
-            mediaType: OAMediaType.JSON,
+            mediaType: OAMediaType.APPLICATION_JSON,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {foo: 'bar'},
           })
           @OAResponse({
             statusCode: 200,
-            mediaType: OAMediaType.XML,
+            mediaType: OAMediaType.APPLICATION_XML,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {bar: 'baz'},
@@ -661,14 +661,14 @@ describe('OADocumentBuilder', function () {
           })
           @OAResponse({
             statusCode: 200,
-            mediaType: OAMediaType.JSON,
+            mediaType: OAMediaType.APPLICATION_JSON,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {foo: 'bar'},
           })
           @OAResponse({
             statusCode: 200,
-            mediaType: OAMediaType.XML,
+            mediaType: OAMediaType.APPLICATION_XML,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {bar: 'baz'},
@@ -690,11 +690,11 @@ describe('OADocumentBuilder', function () {
                   '200': {
                     description: 'Response description',
                     content: {
-                      [OAMediaType.JSON]: {
+                      [OAMediaType.APPLICATION_JSON]: {
                         schema: {type: OADataType.OBJECT},
                         example: {foo: 'bar'},
                       },
-                      [OAMediaType.XML]: {
+                      [OAMediaType.APPLICATION_XML]: {
                         schema: {type: OADataType.OBJECT},
                         example: {bar: 'baz'},
                       },
