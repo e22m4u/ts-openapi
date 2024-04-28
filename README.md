@@ -19,6 +19,160 @@ npm install @e22m4u/ts-openapi
 }
 ```
 
+## Example
+
+Decorators usage.
+
+```ts
+import {
+  OATag,
+  OADataType,
+  OAResponse,
+  OAOperation,
+  OAParameter,
+  OAMediaType,
+  OARequestBody,
+  OAOperationMethod,
+  OAParameterLocation,
+} from '@e22m4u/ts-openapi';
+
+type User = {
+  id: number,
+  name: string,
+  email: string,
+}
+
+@OATag({
+  name: 'User',
+  path: '/user',
+})
+class UserController {
+  @OAOperation({
+    method: OAOperationMethod.PATCH,
+    path: '/{id}',
+  })
+  @OAResponse({
+    mediaType: OAMediaType.JSON,
+    description: 'Patched User',
+    schema: {
+      type: OADataType.OBJECT,
+      properties: {
+        id: {type: OADataType.NUMBER},
+        name: {type: OADataType.STRING},
+        email: {type: OADataType.STRING},
+      },
+    },
+  })
+  patchById(
+    @OAParameter({
+      name: 'id',
+      in: OAParameterLocation.PATH,
+      schema: {type: OADataType.NUMBER},
+    })
+    id: string,
+    @OARequestBody({
+      mediaType: OAMediaType.JSON,
+      schema: {
+        type: OADataType.OBJECT,
+        properties: {
+          name: {type: OADataType.STRING},
+          email: {type: OADataType.STRING},
+        },
+      },
+    })
+    body: User,
+  ): User {
+    // ...
+  }
+}
+```
+
+Create OpenApi Document by the class metadata.
+
+```ts
+import {OADocumentBuilder} from '@e22m4u/ts-openapi';
+
+const builder = new OADocumentBuilder({info: {title: 'My project'}});
+builder.useClassMetadata(UserController);
+const doc = builder.build();
+
+console.log(doc);
+```
+
+Output:
+
+```json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "My project"
+  },
+  "tags": [
+    {
+      "name": "User"
+    }
+  ],
+  "paths": {
+    "/user/{id}": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Patched User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ## Decorators
 
 ### @OATag
@@ -210,155 +364,6 @@ Metadata:
 
 OpenApi Specs:
 - [Request Body Object](https://spec.openapis.org/oas/v3.1.0#request-body-object)
-
-## Example
-
-Decorators usage.
-
-```ts
-import {
-  OATag,
-  OADataType,
-  OAResponse,
-  OAOperation,
-  OAParameter,
-  OAMediaType,
-  OARequestBody,
-  OAOperationMethod,
-  OAParameterLocation,
-} from '@e22m4u/ts-openapi';
-
-type User = {
-  id: number,
-  name: string,
-  email: string,
-}
-
-@OATag({
-  name: 'User',
-  path: '/user',
-})
-class UserController {
-  @OAOperation({
-    method: OAOperationMethod.PATCH,
-    path: '/{id}',
-  })
-  @OAResponse({
-    mediaType: OAMediaType.JSON,
-    description: 'Patched User',
-    schema: {
-      type: OADataType.OBJECT,
-      properties: {
-        id: {type: OADataType.NUMBER},
-        name: {type: OADataType.STRING},
-        email: {type: OADataType.STRING},
-      },
-    },
-  })
-  patchById(
-    @OAParameter({
-      name: 'id',
-      in: OAParameterLocation.PATH,
-      schema: {type: OADataType.NUMBER},
-    })
-    id: string,
-    @OARequestBody({
-      mediaType: OAMediaType.JSON,
-      schema: {
-        type: OADataType.OBJECT,
-        properties: {
-          name: {type: OADataType.STRING},
-          email: {type: OADataType.STRING},
-        },
-      },
-    })
-    body: User,
-  ): User {
-    // ...
-  }
-}
-```
-
-Create OpenApi Document by the class metadata.
-
-```ts
-import {OADocumentBuilder} from '@e22m4u/ts-openapi';
-
-const builder = new OADocumentBuilder({info: {title: 'My project'}});
-builder.useClassMetadata(UserController);
-const doc = builder.build();
-
-console.log(doc);
-// {
-//   "openapi": "3.1.0",
-//   "info": {
-//     "title": "My project"
-//   },
-//   "tags": [
-//     {
-//       "name": "User"
-//     }
-//   ],
-//   "paths": {
-//     "/user/{id}": {
-//       "patch": {
-//         "tags": [
-//           "User"
-//         ],
-//         "parameters": [
-//           {
-//             "name": "id",
-//             "in": "path",
-//             "schema": {
-//               "type": "number"
-//             }
-//           }
-//         ],
-//         "requestBody": {
-//           "content": {
-//             "application/json": {
-//               "schema": {
-//                 "type": "object",
-//                 "properties": {
-//                   "name": {
-//                     "type": "string"
-//                   },
-//                   "email": {
-//                     "type": "string"
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         },
-//         "responses": {
-//           "default": {
-//             "description": "Patched User",
-//             "content": {
-//               "application/json": {
-//                 "schema": {
-//                   "type": "object",
-//                   "properties": {
-//                     "id": {
-//                       "type": "number"
-//                     },
-//                     "name": {
-//                       "type": "string"
-//                     },
-//                     "email": {
-//                       "type": "string"
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-```
 
 ## Tests
 
