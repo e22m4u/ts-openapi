@@ -1,6 +1,6 @@
 ## @e22m4u/ts-openapi
 
-The module produces [OpenAPI Document 3.1.0](https://spec.openapis.org/oas/v3.1.0) that described by TypeScript decorators.
+The module produces [OpenAPI Document 3.1.0](https://spec.openapis.org/oas/v3.1.0) described by TypeScript decorators.
 
 ## Installation
 
