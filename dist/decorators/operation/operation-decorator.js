@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OAOperation = void 0;
+exports.OAOperation = OAOperation;
 const ts_reflector_1 = require("@e22m4u/ts-reflector");
 const operation_reflector_1 = require("./operation-reflector");
 const ts_reflector_2 = require("@e22m4u/ts-reflector");
@@ -17,4 +17,3 @@ function OAOperation(metadata) {
         operation_reflector_1.OAOperationReflector.setMetadata(metadata, target.constructor, propertyKey);
     };
 }
-exports.OAOperation = OAOperation;

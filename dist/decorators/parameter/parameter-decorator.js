@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OAParameter = void 0;
+exports.OAParameter = OAParameter;
 const ts_reflector_1 = require("@e22m4u/ts-reflector");
 const ts_reflector_2 = require("@e22m4u/ts-reflector");
 const parameter_reflector_1 = require("./parameter-reflector");
@@ -20,4 +20,3 @@ function OAParameter(metadata) {
         parameter_reflector_1.OAParameterReflector.setMetadata(metadata, target.constructor, propertyKey);
     };
 }
-exports.OAParameter = OAParameter;

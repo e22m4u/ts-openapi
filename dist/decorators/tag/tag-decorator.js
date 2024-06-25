@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OATag = void 0;
+exports.OATag = OATag;
 const tag_reflector_1 = require("./tag-reflector");
 const ts_reflector_1 = require("@e22m4u/ts-reflector");
 const ts_reflector_2 = require("@e22m4u/ts-reflector");
@@ -20,4 +20,3 @@ function OATag(options) {
         tag_reflector_1.OATagReflector.setMetadata(metadata, target);
     };
 }
-exports.OATag = OATag;

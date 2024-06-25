@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OARequestBody = void 0;
+exports.OARequestBody = OARequestBody;
 const ts_reflector_1 = require("@e22m4u/ts-reflector");
 const ts_reflector_2 = require("@e22m4u/ts-reflector");
 const request_body_reflector_1 = require("./request-body-reflector");
@@ -20,4 +20,3 @@ function OARequestBody(metadata) {
         request_body_reflector_1.OARequestBodyReflector.setMetadata(metadata, target.constructor, propertyKey);
     };
 }
-exports.OARequestBody = OARequestBody;
