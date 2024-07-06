@@ -1,8 +1,5 @@
 {
   "extension": ["ts"],
   "spec": "src/**/*.spec.ts",
-  "require": [
-    ".mocha.setup.js",
-    "tsx"
-  ]
+  "require": ["tsx"]
 }
