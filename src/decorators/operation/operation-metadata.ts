@@ -1,6 +1,6 @@
 import {MetadataKey} from '@e22m4u/ts-reflector';
-import {OAOperationMethod} from '../../document-types';
-import {OAOperationObject} from '../../document-types';
+import {OAOperationMethod} from '../../document-types.js';
+import {OAOperationObject} from '../../document-types.js';
 
 /**
  * Operation metadata.

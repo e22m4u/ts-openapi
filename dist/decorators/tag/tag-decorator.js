@@ -1,22 +1,22 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.OATag = OATag;
-const tag_reflector_1 = require("./tag-reflector");
-const ts_reflector_1 = require("@e22m4u/ts-reflector");
-const ts_reflector_2 = require("@e22m4u/ts-reflector");
+import { OATagReflector } from './tag-reflector.js';
+import { DecoratorTargetType } from '@e22m4u/ts-reflector';
+import { getDecoratorTargetType } from '@e22m4u/ts-reflector';
 /**
  * Tag decorator.
  *
  * @param options
  */
-function OATag(options) {
+export function OATag(options) {
     return function (target) {
-        const decoratorType = (0, ts_reflector_2.getDecoratorTargetType)(target);
-        if (decoratorType !== ts_reflector_1.DecoratorTargetType.CONSTRUCTOR)
+        const decoratorType = getDecoratorTargetType(target);
+        if (decoratorType !== DecoratorTargetType.CONSTRUCTOR)
             throw new Error('@OATag decorator is only supported on a class.');
-        const nameByOptions = options === null || options === void 0 ? void 0 : options.name;
+        const nameByOptions = options?.name;
         const nameByClass = target.name.replace(/controller$/i, '');
-        const metadata = Object.assign(Object.assign({}, options), { name: nameByOptions || nameByClass });
-        tag_reflector_1.OATagReflector.setMetadata(metadata, target);
+        const metadata = {
+            ...options,
+            name: nameByOptions || nameByClass,
+        };
+        OATagReflector.setMetadata(metadata, target);
     };
 }

@@ -1,5 +1,5 @@
 import { MetadataKey } from '@e22m4u/ts-reflector';
-import { OATagObject } from '../../document-types';
+import { OATagObject } from '../../document-types.js';
 /**
  * Tag metadata.
  */

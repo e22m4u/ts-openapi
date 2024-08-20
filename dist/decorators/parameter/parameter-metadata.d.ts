@@ -1,5 +1,5 @@
 import { MetadataKey } from '@e22m4u/ts-reflector';
-import { OAParameterObject } from '../../document-types';
+import { OAParameterObject } from '../../document-types.js';
 /**
  * Parameter metadata.
  */

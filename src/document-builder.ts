@@ -1,18 +1,18 @@
 import path from 'path';
-import {Flatten} from './types';
-import {cloneDeep} from './utils';
-import {PartialBy} from './types';
-import {Constructor} from './types';
-import {OATagReflector} from './decorators';
-import {OAResponseReflector} from './decorators';
-import {OAOperationMetadata} from './decorators';
-import {OADocumentObject} from './document-types';
-import {OAResponseObject} from './document-types';
-import {OAParameterReflector} from './decorators';
-import {OAOperationReflector} from './decorators';
-import {OARequestBodyReflector} from './decorators';
-import {OARequestBodyObject} from './document-types';
-import {OAParameterLocation} from './document-types';
+import {Flatten} from './types.js';
+import {PartialBy} from './types.js';
+import {Constructor} from './types.js';
+import {cloneDeep} from './utils/index.js';
+import {OATagReflector} from './decorators/index.js';
+import {OADocumentObject} from './document-types.js';
+import {OAResponseObject} from './document-types.js';
+import {OARequestBodyObject} from './document-types.js';
+import {OAParameterLocation} from './document-types.js';
+import {OAResponseReflector} from './decorators/index.js';
+import {OAOperationMetadata} from './decorators/index.js';
+import {OAParameterReflector} from './decorators/index.js';
+import {OAOperationReflector} from './decorators/index.js';
+import {OARequestBodyReflector} from './decorators/index.js';
 
 /**
  * Document builder.

@@ -1,5 +1,5 @@
-import { Prototype } from '../../types';
-import { OAParameterObject } from '../../document-types';
+import { Prototype } from '../../types.js';
+import { OAParameterObject } from '../../document-types.js';
 /**
  * Parameter decorator.
  *

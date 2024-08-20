@@ -1,8 +1,8 @@
-import {Flatten} from '../../types';
-import {PartialBy} from '../../types';
-import {Constructor} from '../../types';
-import {OATagMetadata} from './tag-metadata';
-import {OATagReflector} from './tag-reflector';
+import {Flatten} from '../../types.js';
+import {PartialBy} from '../../types.js';
+import {Constructor} from '../../types.js';
+import {OATagMetadata} from './tag-metadata.js';
+import {OATagReflector} from './tag-reflector.js';
 import {DecoratorTargetType} from '@e22m4u/ts-reflector';
 import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
 

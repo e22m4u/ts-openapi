@@ -1,6 +1,6 @@
-import { Constructor } from '../../types';
-import { OAResponseMetadata } from './response-metadata';
-import { OAResponseMetadataMap } from './response-metadata';
+import { Constructor } from '../../types.js';
+import { OAResponseMetadata } from './response-metadata.js';
+import { OAResponseMetadataMap } from './response-metadata.js';
 /**
  * Response reflector.
  */

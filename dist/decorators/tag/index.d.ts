@@ -1,3 +1,3 @@
-export * from './tag-metadata';
-export * from './tag-reflector';
-export * from './tag-decorator';
+export * from './tag-metadata.js';
+export * from './tag-reflector.js';
+export * from './tag-decorator.js';

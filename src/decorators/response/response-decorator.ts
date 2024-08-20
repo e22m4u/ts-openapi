@@ -1,8 +1,8 @@
-import {Prototype} from '../../types';
-import {Constructor} from '../../types';
-import {OAResponseMetadata} from './response-metadata';
+import {Prototype} from '../../types.js';
+import {Constructor} from '../../types.js';
 import {DecoratorTargetType} from '@e22m4u/ts-reflector';
-import {OAResponseReflector} from './response-reflector';
+import {OAResponseMetadata} from './response-metadata.js';
+import {OAResponseReflector} from './response-reflector.js';
 import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
 
 /**

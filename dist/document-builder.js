@@ -1,21 +1,21 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.OADocumentBuilder = void 0;
-const path_1 = __importDefault(require("path"));
-const utils_1 = require("./utils");
-const decorators_1 = require("./decorators");
-const decorators_2 = require("./decorators");
-const decorators_3 = require("./decorators");
-const decorators_4 = require("./decorators");
-const decorators_5 = require("./decorators");
-const document_types_1 = require("./document-types");
+import path from 'path';
+import { cloneDeep } from './utils/index.js';
+import { OATagReflector } from './decorators/index.js';
+import { OAParameterLocation } from './document-types.js';
+import { OAResponseReflector } from './decorators/index.js';
+import { OAParameterReflector } from './decorators/index.js';
+import { OAOperationReflector } from './decorators/index.js';
+import { OARequestBodyReflector } from './decorators/index.js';
 /**
  * Document builder.
  */
-class OADocumentBuilder {
+export class OADocumentBuilder {
+    /**
+     * Open Api Document.
+     *
+     * @protected
+     */
+    doc;
     /**
      * Constructor.
      *
@@ -23,7 +23,7 @@ class OADocumentBuilder {
      */
     constructor(doc) {
         // avoid argument mutation
-        this.doc = (0, utils_1.cloneDeep)(Object.assign(Object.assign({}, doc), { openapi: '3.1.0' }));
+        this.doc = cloneDeep({ ...doc, openapi: '3.1.0' });
         // force openapi version
         this.doc.info.version = '3.1.0';
     }
@@ -31,7 +31,7 @@ class OADocumentBuilder {
      * Returns the OADocumentObject.
      */
     build() {
-        return (0, utils_1.cloneDeep)(this.doc);
+        return cloneDeep(this.doc);
     }
     /**
      * Use classes metadata.
@@ -48,52 +48,48 @@ class OADocumentBuilder {
      * @param target
      */
     useClassMetadata(target) {
-        var _a, _b;
         // tag
-        const tagMd = decorators_1.OATagReflector.getMetadata(target);
-        const tagPath = (_a = tagMd === null || tagMd === void 0 ? void 0 : tagMd.path) !== null && _a !== void 0 ? _a : '';
-        const tagName = tagMd === null || tagMd === void 0 ? void 0 : tagMd.name;
+        const tagMd = OATagReflector.getMetadata(target);
+        const tagPath = tagMd?.path ?? '';
+        const tagName = tagMd?.name;
         if (tagMd) {
-            const tag = (0, utils_1.cloneDeep)(tagMd);
+            const tag = cloneDeep(tagMd);
             delete tag.path;
-            this.doc.tags = (_b = this.doc.tags) !== null && _b !== void 0 ? _b : [];
+            this.doc.tags = this.doc.tags ?? [];
             this.doc.tags.push(tag);
         }
         // operations
-        const operationMdMap = decorators_4.OAOperationReflector.getMetadata(target);
+        const operationMdMap = OAOperationReflector.getMetadata(target);
         operationMdMap.forEach((operationMd, methodName) => {
-            var _a, _b, _c, _d, _e, _f;
-            const oaOperation = (0, utils_1.cloneDeep)(operationMd);
+            const oaOperation = cloneDeep(operationMd);
             delete oaOperation.path;
             delete oaOperation.method;
             if (tagName != null) {
-                oaOperation.tags = (_a = oaOperation.tags) !== null && _a !== void 0 ? _a : [];
+                oaOperation.tags = oaOperation.tags ?? [];
                 oaOperation.tags.push(tagName);
             }
-            const operationPath = path_1.default.join('/', tagPath, operationMd.path).replace(/\/$/, '') || '/';
-            this.doc.paths = (_b = this.doc.paths) !== null && _b !== void 0 ? _b : {};
-            this.doc.paths[operationPath] = (_c = this.doc.paths[operationPath]) !== null && _c !== void 0 ? _c : {};
+            const operationPath = path.join('/', tagPath, operationMd.path).replace(/\/$/, '') || '/';
+            this.doc.paths = this.doc.paths ?? {};
+            this.doc.paths[operationPath] = this.doc.paths[operationPath] ?? {};
             const oaPathItem = this.doc.paths[operationPath];
             oaPathItem[operationMd.method] = oaOperation;
             // parameters
-            const parametersMdMap = decorators_3.OAParameterReflector.getMetadata(target);
+            const parametersMdMap = OAParameterReflector.getMetadata(target);
             const parametersMd = parametersMdMap.get(methodName);
             if (parametersMd)
                 parametersMd.reverse().forEach(parameterMd => {
-                    var _a;
-                    oaOperation.parameters = (_a = oaOperation.parameters) !== null && _a !== void 0 ? _a : [];
-                    const required = parameterMd.in === document_types_1.OAParameterLocation.PATH || parameterMd.required;
-                    oaOperation.parameters.push(Object.assign(Object.assign({}, parameterMd), { required }));
+                    oaOperation.parameters = oaOperation.parameters ?? [];
+                    const required = parameterMd.in === OAParameterLocation.PATH || parameterMd.required;
+                    oaOperation.parameters.push({ ...parameterMd, required });
                 });
             // request body
-            const requestBodiesMdMap = decorators_5.OARequestBodyReflector.getMetadata(target);
+            const requestBodiesMdMap = OARequestBodyReflector.getMetadata(target);
             const requestBodiesMd = requestBodiesMdMap.get(methodName);
             if (requestBodiesMd) {
-                oaPathItem[operationMd.method] = (_d = oaPathItem[operationMd.method]) !== null && _d !== void 0 ? _d : {};
+                oaPathItem[operationMd.method] = oaPathItem[operationMd.method] ?? {};
                 const oaOperation = oaPathItem[operationMd.method];
                 requestBodiesMd.reverse().forEach(requestBodyMd => {
-                    var _a;
-                    oaOperation.requestBody = (_a = oaOperation.requestBody) !== null && _a !== void 0 ? _a : {
+                    oaOperation.requestBody = oaOperation.requestBody ?? {
                         description: requestBodyMd.description,
                         content: {},
                         required: requestBodyMd.required,
@@ -106,23 +102,22 @@ class OADocumentBuilder {
                 });
             }
             // response
-            const responsesMdMap = decorators_2.OAResponseReflector.getMetadata(target);
+            const responsesMdMap = OAResponseReflector.getMetadata(target);
             const responsesMd = responsesMdMap.get(methodName);
             if (responsesMd) {
-                oaPathItem[operationMd.method] = (_e = oaPathItem[operationMd.method]) !== null && _e !== void 0 ? _e : {};
+                oaPathItem[operationMd.method] = oaPathItem[operationMd.method] ?? {};
                 const oaOperation = oaPathItem[operationMd.method];
-                oaOperation.responses = (_f = oaOperation.responses) !== null && _f !== void 0 ? _f : {};
+                oaOperation.responses = oaOperation.responses ?? {};
                 const oaResponses = oaOperation.responses;
                 responsesMd.reverse().forEach(responseMd => {
-                    var _a, _b;
                     const statusCode = responseMd.statusCode
                         ? String(responseMd.statusCode)
                         : 'default';
-                    oaResponses[statusCode] = (_a = oaResponses[statusCode]) !== null && _a !== void 0 ? _a : {
+                    oaResponses[statusCode] = oaResponses[statusCode] ?? {
                         description: responseMd.description,
                     };
                     const oaResponse = oaResponses[statusCode];
-                    oaResponse.content = (_b = oaResponse.content) !== null && _b !== void 0 ? _b : {};
+                    oaResponse.content = oaResponse.content ?? {};
                     const oaContent = oaResponse.content;
                     oaContent[responseMd.mediaType] = {
                         schema: responseMd.schema,
@@ -134,4 +129,3 @@ class OADocumentBuilder {
         return this;
     }
 }
-exports.OADocumentBuilder = OADocumentBuilder;

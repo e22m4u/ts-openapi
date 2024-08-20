@@ -1,8 +1,8 @@
-import {Constructor} from '../../types';
+import {Constructor} from '../../types.js';
 import {Reflector} from '@e22m4u/ts-reflector';
-import {OAResponseMetadata} from './response-metadata';
-import {OAResponseMetadataMap} from './response-metadata';
-import {OA_RESPONSES_METADATA_KEY} from './response-metadata';
+import {OAResponseMetadata} from './response-metadata.js';
+import {OAResponseMetadataMap} from './response-metadata.js';
+import {OA_RESPONSES_METADATA_KEY} from './response-metadata.js';
 
 /**
  * Response reflector.

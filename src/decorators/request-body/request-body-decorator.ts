@@ -1,9 +1,9 @@
-import {Prototype} from '../../types';
-import {Constructor} from '../../types';
+import {Prototype} from '../../types.js';
+import {Constructor} from '../../types.js';
 import {DecoratorTargetType} from '@e22m4u/ts-reflector';
 import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
-import {OARequestBodyMetadata} from './request-body-metadata';
-import {OARequestBodyReflector} from './request-body-reflector';
+import {OARequestBodyMetadata} from './request-body-metadata.js';
+import {OARequestBodyReflector} from './request-body-reflector.js';
 
 /**
  * Request body decorator.

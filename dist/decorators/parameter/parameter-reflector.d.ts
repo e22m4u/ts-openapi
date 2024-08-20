@@ -1,6 +1,6 @@
-import { Constructor } from '../../types';
-import { OAParameterMetadata } from './parameter-metadata';
-import { OAParametersMetadataMap } from './parameter-metadata';
+import { Constructor } from '../../types.js';
+import { OAParameterMetadata } from './parameter-metadata.js';
+import { OAParametersMetadataMap } from './parameter-metadata.js';
 /**
  * Parameter reflector.
  */

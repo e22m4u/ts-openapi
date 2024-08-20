@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.OATagReflector = void 0;
-const ts_reflector_1 = require("@e22m4u/ts-reflector");
-const tag_metadata_1 = require("./tag-metadata");
+import { Reflector } from '@e22m4u/ts-reflector';
+import { OA_TAG_METADATA_KEY } from './tag-metadata.js';
 /**
  * Tag reflector.
  */
-class OATagReflector {
+export class OATagReflector {
     /**
      * Set metadata.
      *
@@ -14,7 +11,7 @@ class OATagReflector {
      * @param target
      */
     static setMetadata(metadata, target) {
-        return ts_reflector_1.Reflector.defineMetadata(tag_metadata_1.OA_TAG_METADATA_KEY, metadata, target);
+        return Reflector.defineMetadata(OA_TAG_METADATA_KEY, metadata, target);
     }
     /**
      * Get metadata.
@@ -22,7 +19,6 @@ class OATagReflector {
      * @param target
      */
     static getMetadata(target) {
-        return ts_reflector_1.Reflector.getOwnMetadata(tag_metadata_1.OA_TAG_METADATA_KEY, target);
+        return Reflector.getOwnMetadata(OA_TAG_METADATA_KEY, target);
     }
 }
-exports.OATagReflector = OATagReflector;

@@ -1,9 +1,9 @@
-import {Prototype} from '../../types';
-import {Constructor} from '../../types';
+import {Prototype} from '../../types.js';
+import {Constructor} from '../../types.js';
 import {DecoratorTargetType} from '@e22m4u/ts-reflector';
-import {OAOperationMetadata} from './operation-metadata';
-import {OAOperationReflector} from './operation-reflector';
+import {OAOperationMetadata} from './operation-metadata.js';
 import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
+import {OAOperationReflector} from './operation-reflector.js';
 
 /**
  * Operation decorator.

@@ -1,6 +1,6 @@
 import {MetadataKey} from '@e22m4u/ts-reflector';
-import {OAMediaType} from '../../document-types';
-import {OASchemaObject} from '../../document-types';
+import {OAMediaType} from '../../document-types.js';
+import {OASchemaObject} from '../../document-types.js';
 
 /**
  * Response metadata.

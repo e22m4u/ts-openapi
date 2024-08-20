@@ -1,9 +1,9 @@
-import {Prototype} from '../../types';
-import {Constructor} from '../../types';
+import {Prototype} from '../../types.js';
+import {Constructor} from '../../types.js';
 import {DecoratorTargetType} from '@e22m4u/ts-reflector';
-import {OAParameterObject} from '../../document-types';
+import {OAParameterObject} from '../../document-types.js';
 import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
-import {OAParameterReflector} from './parameter-reflector';
+import {OAParameterReflector} from './parameter-reflector.js';
 
 /**
  * Parameter decorator.

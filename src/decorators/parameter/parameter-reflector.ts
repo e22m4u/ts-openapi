@@ -1,8 +1,8 @@
-import {Constructor} from '../../types';
+import {Constructor} from '../../types.js';
 import {Reflector} from '@e22m4u/ts-reflector';
-import {OAParameterMetadata} from './parameter-metadata';
-import {OAParametersMetadataMap} from './parameter-metadata';
-import {OA_PARAMETERS_METADATA_KEY} from './parameter-metadata';
+import {OAParameterMetadata} from './parameter-metadata.js';
+import {OAParametersMetadataMap} from './parameter-metadata.js';
+import {OA_PARAMETERS_METADATA_KEY} from './parameter-metadata.js';
 
 /**
  * Parameter reflector.

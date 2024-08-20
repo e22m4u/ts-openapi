@@ -1,3 +1,3 @@
-export * from './parameter-metadata';
-export * from './parameter-reflector';
-export * from './parameter-decorator';
+export * from './parameter-metadata.js';
+export * from './parameter-reflector.js';
+export * from './parameter-decorator.js';

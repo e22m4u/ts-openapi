@@ -1,5 +1,5 @@
-import { Prototype } from '../../types';
-import { OAOperationMetadata } from './operation-metadata';
+import { Prototype } from '../../types.js';
+import { OAOperationMetadata } from './operation-metadata.js';
 /**
  * Operation decorator.
  *

@@ -1,7 +1,7 @@
-import { Flatten } from '../../types';
-import { PartialBy } from '../../types';
-import { Constructor } from '../../types';
-import { OATagMetadata } from './tag-metadata';
+import { Flatten } from '../../types.js';
+import { PartialBy } from '../../types.js';
+import { Constructor } from '../../types.js';
+import { OATagMetadata } from './tag-metadata.js';
 /**
  * Tag options.
  */

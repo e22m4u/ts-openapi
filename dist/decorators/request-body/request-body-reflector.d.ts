@@ -1,6 +1,6 @@
-import { Constructor } from '../../types';
-import { OARequestBodyMetadata } from './request-body-metadata';
-import { OARequestBodiesMetadataMap } from './request-body-metadata';
+import { Constructor } from '../../types.js';
+import { OARequestBodyMetadata } from './request-body-metadata.js';
+import { OARequestBodiesMetadataMap } from './request-body-metadata.js';
 /**
  * Request body reflector.
  */

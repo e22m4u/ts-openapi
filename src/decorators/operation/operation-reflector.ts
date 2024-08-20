@@ -1,8 +1,8 @@
-import {Constructor} from '../../types';
+import {Constructor} from '../../types.js';
 import {Reflector} from '@e22m4u/ts-reflector';
-import {OAOperationMetadata} from './operation-metadata';
-import {OAOperationMetadataMap} from './operation-metadata';
-import {OA_OPERATIONS_METADATA_KEY} from './operation-metadata';
+import {OAOperationMetadata} from './operation-metadata.js';
+import {OAOperationMetadataMap} from './operation-metadata.js';
+import {OA_OPERATIONS_METADATA_KEY} from './operation-metadata.js';
 
 /**
  * Operation reflector.

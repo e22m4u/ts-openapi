@@ -1,8 +1,8 @@
-import {Constructor} from '../../types';
+import {Constructor} from '../../types.js';
 import {Reflector} from '@e22m4u/ts-reflector';
-import {OARequestBodyMetadata} from './request-body-metadata';
-import {OARequestBodiesMetadataMap} from './request-body-metadata';
-import {OA_REQUEST_BODIES_METADATA_KEY} from './request-body-metadata';
+import {OARequestBodyMetadata} from './request-body-metadata.js';
+import {OARequestBodiesMetadataMap} from './request-body-metadata.js';
+import {OA_REQUEST_BODIES_METADATA_KEY} from './request-body-metadata.js';
 
 /**
  * Request body reflector.

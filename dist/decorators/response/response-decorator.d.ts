@@ -1,5 +1,5 @@
-import { Prototype } from '../../types';
-import { OAResponseMetadata } from './response-metadata';
+import { Prototype } from '../../types.js';
+import { OAResponseMetadata } from './response-metadata.js';
 /**
  * Response decorator.
  *

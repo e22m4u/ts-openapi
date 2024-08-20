@@ -1,6 +1,6 @@
-import { Flatten } from './types';
-import { Constructor } from './types';
-import { OADocumentObject } from './document-types';
+import { Flatten } from './types.js';
+import { Constructor } from './types.js';
+import { OADocumentObject } from './document-types.js';
 /**
  * Document builder.
  */

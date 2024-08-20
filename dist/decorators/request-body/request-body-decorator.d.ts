@@ -1,5 +1,5 @@
-import { Prototype } from '../../types';
-import { OARequestBodyMetadata } from './request-body-metadata';
+import { Prototype } from '../../types.js';
+import { OARequestBodyMetadata } from './request-body-metadata.js';
 /**
  * Request body decorator.
  *

@@ -1,7 +1,7 @@
-import {Constructor} from '../../types';
-import {OATagMetadata} from './tag-metadata';
+import {Constructor} from '../../types.js';
 import {Reflector} from '@e22m4u/ts-reflector';
-import {OA_TAG_METADATA_KEY} from './tag-metadata';
+import {OATagMetadata} from './tag-metadata.js';
+import {OA_TAG_METADATA_KEY} from './tag-metadata.js';
 
 /**
  * Tag reflector.

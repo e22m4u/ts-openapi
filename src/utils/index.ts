@@ -1,1 +1,1 @@
-export * from './clone-deep';
+export * from './clone-deep.js';

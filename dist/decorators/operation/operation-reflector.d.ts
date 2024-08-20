@@ -1,6 +1,6 @@
-import { Constructor } from '../../types';
-import { OAOperationMetadata } from './operation-metadata';
-import { OAOperationMetadataMap } from './operation-metadata';
+import { Constructor } from '../../types.js';
+import { OAOperationMetadata } from './operation-metadata.js';
+import { OAOperationMetadataMap } from './operation-metadata.js';
 /**
  * Operation reflector.
  */

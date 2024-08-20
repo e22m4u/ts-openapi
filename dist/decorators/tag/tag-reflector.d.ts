@@ -1,5 +1,5 @@
-import { Constructor } from '../../types';
-import { OATagMetadata } from './tag-metadata';
+import { Constructor } from '../../types.js';
+import { OATagMetadata } from './tag-metadata.js';
 /**
  * Tag reflector.
  */
