@@ -123,7 +123,7 @@ const doc = builder.build();
 console.log(doc);
 ```
 
-Результат работы метода `build`
+Результат работы метода `build` класса `OADocumentBuilder`
 
 ```json
 {
