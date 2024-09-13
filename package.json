@@ -5,7 +5,8 @@
   "keywords": [
     "openapi",
     "swagger",
-    "decorator"
+    "decorator",
+    "typescript"
   ],
   "repository": {
     "type": "git",
