@@ -2,7 +2,7 @@
 
 *English | [Русский](./README-ru.md)*
 
-A set of TypeScript decorators for generating
+TypeScript decorators for generating
 [The OpenAPI Document 3.1.0](https://spec.openapis.org/oas/v3.1.0)
 
 ## Installation

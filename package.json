@@ -1,7 +1,7 @@
 {
   "name": "@e22m4u/ts-openapi",
   "version": "0.0.6",
-  "description": "Генератор OpenAPI документа для TypeScript",
+  "description": "TypeScript decorators for generating The OpenAPI Document",
   "keywords": [
     "openapi",
     "swagger",
