@@ -11,24 +11,9 @@ TypeScript decorators for generating
 npm install @e22m4u/ts-openapi
 ```
 
-#### ES-module support
-
-Native ES-module support is required for this module.
-Do the following steps to set up your TypeScript project.
-
-1. add `"type": "module"` to the `package.json` file
-2. add the options below to the `tsconfig.json`
-
-```json
-{
-  "module": "NodeNext",
-  "moduleResolution": "NodeNext"
-}
-```
-
 #### Decorators support
 
-To declare metadata using decorators add the following
+To enable decorators support add the following
 options to your `tsconfig.json` file.
 
 ```json
