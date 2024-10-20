@@ -1,12 +1,12 @@
 /**
  * A callable type with the "new" operator
- * allows class and constructor.
+ * that allows class and constructor types.
  */
 export interface Constructor<T = object> {
     new (...args: any[]): T;
 }
 /**
- * A type of object prototype which excludes
+ * An object prototype that excludes
  * function and scalar values.
  */
 export type Prototype<T = object> = T & object & {
@@ -17,15 +17,15 @@ export type Prototype<T = object> = T & object & {
     prototype?: object;
 };
 /**
- * Make a specific property optional.
+ * Makes a specific property of T as optional.
  */
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 /**
- * Identity.
+ * A part of the Flatten type.
  */
 export type Identity<T> = T;
 /**
- * Flatten.
+ * Makes T more human-readable.
  */
 export type Flatten<T> = Identity<{
     [k in keyof T]: T[k];
