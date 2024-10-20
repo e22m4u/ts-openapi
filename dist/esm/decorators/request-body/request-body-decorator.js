@@ -6,12 +6,12 @@ import { OARequestBodyReflector } from './request-body-reflector.js';
  *
  * @param metadata
  */
-export function OARequestBody(metadata) {
+export function oaRequestBody(metadata) {
     return function (target, propertyKey, indexOrDescriptor) {
         const decoratorType = getDecoratorTargetType(target, propertyKey, indexOrDescriptor);
         if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD &&
             decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER) {
-            throw new Error('@OARequestBody decorator is only supported on an instance method ' +
+            throw new Error('@oaRequestBody decorator is only supported on an instance method ' +
                 'or an instance method parameter.');
         }
         OARequestBodyReflector.setMetadata(metadata, target.constructor, propertyKey);

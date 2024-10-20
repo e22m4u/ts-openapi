@@ -5,4 +5,4 @@ import { OAOperationMetadata } from './operation-metadata.js';
  *
  * @param metadata
  */
-export declare function OAOperation<T extends object>(metadata: OAOperationMetadata): (target: Prototype<T>, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare function oaOperation<T extends object>(metadata: OAOperationMetadata): (target: Prototype<T>, propertyKey: string, descriptor: PropertyDescriptor) => void;

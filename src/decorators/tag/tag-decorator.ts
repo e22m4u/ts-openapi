@@ -16,11 +16,11 @@ type OATagOptions = Flatten<PartialBy<OATagMetadata, 'name'>>;
  *
  * @param options
  */
-export function OATag<T extends object>(options?: OATagOptions) {
+export function oaTag<T extends object>(options?: OATagOptions) {
   return function (target: Constructor<T>) {
     const decoratorType = getDecoratorTargetType(target);
     if (decoratorType !== DecoratorTargetType.CONSTRUCTOR)
-      throw new Error('@OATag decorator is only supported on a class.');
+      throw new Error('@oaTag decorator is only supported on a class.');
     const nameByOptions = options?.name;
     const nameByClass = target.name.replace(/controller$/i, '');
     const metadata = {

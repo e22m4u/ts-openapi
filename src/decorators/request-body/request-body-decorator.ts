@@ -10,7 +10,7 @@ import {OARequestBodyReflector} from './request-body-reflector.js';
  *
  * @param metadata
  */
-export function OARequestBody<T extends object>(
+export function oaRequestBody<T extends object>(
   metadata: OARequestBodyMetadata,
 ) {
   return function (
@@ -28,7 +28,7 @@ export function OARequestBody<T extends object>(
       decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER
     ) {
       throw new Error(
-        '@OARequestBody decorator is only supported on an instance method ' +
+        '@oaRequestBody decorator is only supported on an instance method ' +
           'or an instance method parameter.',
       );
     }

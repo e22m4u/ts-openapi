@@ -6,11 +6,11 @@ import { getDecoratorTargetType } from '@e22m4u/ts-reflector';
  *
  * @param options
  */
-export function OATag(options) {
+export function oaTag(options) {
     return function (target) {
         const decoratorType = getDecoratorTargetType(target);
         if (decoratorType !== DecoratorTargetType.CONSTRUCTOR)
-            throw new Error('@OATag decorator is only supported on a class.');
+            throw new Error('@oaTag decorator is only supported on a class.');
         const nameByOptions = options?.name;
         const nameByClass = target.name.replace(/controller$/i, '');
         const metadata = {

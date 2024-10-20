@@ -5,4 +5,4 @@ import { OARequestBodyMetadata } from './request-body-metadata.js';
  *
  * @param metadata
  */
-export declare function OARequestBody<T extends object>(metadata: OARequestBodyMetadata): (target: Prototype<T>, propertyKey: string, indexOrDescriptor: PropertyDescriptor | number) => void;
+export declare function oaRequestBody<T extends object>(metadata: OARequestBodyMetadata): (target: Prototype<T>, propertyKey: string, indexOrDescriptor: PropertyDescriptor | number) => void;

@@ -11,5 +11,5 @@ type OATagOptions = Flatten<PartialBy<OATagMetadata, 'name'>>;
  *
  * @param options
  */
-export declare function OATag<T extends object>(options?: OATagOptions): (target: Constructor<T>) => void;
+export declare function oaTag<T extends object>(options?: OATagOptions): (target: Constructor<T>) => void;
 export {};

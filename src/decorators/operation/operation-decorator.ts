@@ -10,7 +10,7 @@ import {OAOperationReflector} from './operation-reflector.js';
  *
  * @param metadata
  */
-export function OAOperation<T extends object>(metadata: OAOperationMetadata) {
+export function oaOperation<T extends object>(metadata: OAOperationMetadata) {
   return function (
     target: Prototype<T>,
     propertyKey: string,
@@ -23,7 +23,7 @@ export function OAOperation<T extends object>(metadata: OAOperationMetadata) {
     );
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD)
       throw new Error(
-        '@OAOperation decorator is only supported on an instance method.',
+        '@oaOperation decorator is only supported on an instance method.',
       );
     OAOperationReflector.setMetadata(
       metadata,

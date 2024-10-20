@@ -6,12 +6,12 @@ import { OAParameterReflector } from './parameter-reflector.js';
  *
  * @param metadata
  */
-export function OAParameter(metadata) {
+export function oaParameter(metadata) {
     return function (target, propertyKey, indexOrDescriptor) {
         const decoratorType = getDecoratorTargetType(target, propertyKey, indexOrDescriptor);
         if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD &&
             decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER) {
-            throw new Error('@OAParameter decorator is only supported on an instance method ' +
+            throw new Error('@oaParameter decorator is only supported on an instance method ' +
                 'or an instance method parameter.');
         }
         OAParameterReflector.setMetadata(metadata, target.constructor, propertyKey);

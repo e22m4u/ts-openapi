@@ -10,7 +10,7 @@ import {OAParameterReflector} from './parameter-reflector.js';
  *
  * @param metadata
  */
-export function OAParameter<T extends object>(metadata: OAParameterObject) {
+export function oaParameter<T extends object>(metadata: OAParameterObject) {
   return function (
     target: Prototype<T>,
     propertyKey: string,
@@ -26,7 +26,7 @@ export function OAParameter<T extends object>(metadata: OAParameterObject) {
       decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER
     ) {
       throw new Error(
-        '@OAParameter decorator is only supported on an instance method ' +
+        '@oaParameter decorator is only supported on an instance method ' +
           'or an instance method parameter.',
       );
     }

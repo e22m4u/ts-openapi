@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {describe} from 'mocha';
-import {OATag} from './decorators/index.js';
+import {oaTag} from './decorators/index.js';
 import {OADataType} from './document-types.js';
 import {OAMediaType} from './document-types.js';
-import {OAResponse} from './decorators/index.js';
-import {OAOperation} from './decorators/index.js';
-import {OAParameter} from './decorators/index.js';
-import {OARequestBody} from './decorators/index.js';
+import {oaResponse} from './decorators/index.js';
+import {oaOperation} from './decorators/index.js';
+import {oaParameter} from './decorators/index.js';
+import {oaRequestBody} from './decorators/index.js';
 import {OAOperationMethod} from './document-types.js';
 import {OADocumentBuilder} from './document-builder.js';
 import {OAParameterLocation} from './document-types.js';
@@ -52,7 +52,7 @@ describe('OADocumentBuilder', function () {
   describe('useClassMetadata', function () {
     describe('tag', function () {
       it('adds the tag object by the class metadata', function () {
-        @OATag({name: 'Tag'})
+        @oaTag({name: 'Tag'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
         builder.useClassMetadata(Target);
@@ -64,7 +64,7 @@ describe('OADocumentBuilder', function () {
       });
 
       it('uses the class name as the tag name', function () {
-        @OATag()
+        @oaTag()
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
         builder.useClassMetadata(Target);
@@ -76,7 +76,7 @@ describe('OADocumentBuilder', function () {
       });
 
       it('ignores the "Controller" postfix of the class name', function () {
-        @OATag()
+        @oaTag()
         class UserController {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
         builder.useClassMetadata(UserController);
@@ -88,7 +88,7 @@ describe('OADocumentBuilder', function () {
       });
 
       it('does not ignore the "Controller" postfix of the tag name that defined explicitly', function () {
-        @OATag({name: 'UserController'})
+        @oaTag({name: 'UserController'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
         builder.useClassMetadata(Target);
@@ -100,7 +100,7 @@ describe('OADocumentBuilder', function () {
       });
 
       it('does not add the "path" option from the tag metadata', function () {
-        @OATag({name: 'Tag', path: '/path'})
+        @oaTag({name: 'Tag', path: '/path'})
         class Target {}
         const builder = new OADocumentBuilder(DUMMY_DOC);
         builder.useClassMetadata(Target);
@@ -115,7 +115,7 @@ describe('OADocumentBuilder', function () {
     describe('operation', function () {
       it('adds the operation object by the class metadata', function () {
         class Target {
-          @OAOperation({
+          @oaOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
             summary: 'Operation summary',
@@ -140,9 +140,9 @@ describe('OADocumentBuilder', function () {
       });
 
       it('adds the target tag to the operation object', function () {
-        @OATag()
+        @oaTag()
         class Target {
-          @OAOperation({
+          @oaOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
             summary: 'Operation summary',
@@ -169,9 +169,9 @@ describe('OADocumentBuilder', function () {
       });
 
       it('uses the tag path as the operation path prefix', function () {
-        @OATag({path: '/tag'})
+        @oaTag({path: '/tag'})
         class Target {
-          @OAOperation({
+          @oaOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
             summary: 'Operation summary',
@@ -202,12 +202,12 @@ describe('OADocumentBuilder', function () {
       describe('decorator applied to an instance method', () => {
         it('ignores parameters metadata if no operation declared', function () {
           class Target {
-            @OAParameter({
+            @oaParameter({
               name: 'param1',
               in: OAParameterLocation.QUERY,
               schema: {type: OADataType.STRING},
             })
-            @OAParameter({
+            @oaParameter({
               name: 'param2',
               in: OAParameterLocation.QUERY,
               schema: {type: OADataType.NUMBER},
@@ -224,17 +224,17 @@ describe('OADocumentBuilder', function () {
 
         it('adds declared parameters to the operation object', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
-            @OAParameter({
+            @oaParameter({
               name: 'param1',
               in: OAParameterLocation.QUERY,
               schema: {type: OADataType.STRING},
             })
-            @OAParameter({
+            @oaParameter({
               name: 'param2',
               in: OAParameterLocation.QUERY,
               schema: {type: OADataType.NUMBER},
@@ -272,17 +272,17 @@ describe('OADocumentBuilder', function () {
 
         it('makes path parameters required', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
-            @OAParameter({
+            @oaParameter({
               name: 'param1',
               in: OAParameterLocation.PATH,
               schema: {type: OADataType.STRING},
             })
-            @OAParameter({
+            @oaParameter({
               name: 'param2',
               in: OAParameterLocation.PATH,
               schema: {type: OADataType.NUMBER},
@@ -325,13 +325,13 @@ describe('OADocumentBuilder', function () {
         it('ignores parameters metadata if no operation declared', function () {
           class Target {
             operation(
-              @OAParameter({
+              @oaParameter({
                 name: 'param1',
                 in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.STRING},
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
-              @OAParameter({
+              @oaParameter({
                 name: 'param2',
                 in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.NUMBER},
@@ -349,19 +349,19 @@ describe('OADocumentBuilder', function () {
 
         it('adds declared parameters to the operation object', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
             operation(
-              @OAParameter({
+              @oaParameter({
                 name: 'param1',
                 in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.STRING},
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
-              @OAParameter({
+              @oaParameter({
                 name: 'param2',
                 in: OAParameterLocation.QUERY,
                 schema: {type: OADataType.NUMBER},
@@ -400,19 +400,19 @@ describe('OADocumentBuilder', function () {
 
         it('makes path parameters required', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
             operation(
-              @OAParameter({
+              @oaParameter({
                 name: 'param1',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.STRING},
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               param1: string,
-              @OAParameter({
+              @oaParameter({
                 name: 'param2',
                 in: OAParameterLocation.PATH,
                 schema: {type: OADataType.NUMBER},
@@ -457,14 +457,14 @@ describe('OADocumentBuilder', function () {
       describe('decorator applied to an instance method', () => {
         it('ignores request body metadata if no operation declared', function () {
           class Target {
-            @OARequestBody({
+            @oaRequestBody({
               mediaType: OAMediaType.APPLICATION_JSON,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {foo: 'bar'},
               required: true,
             })
-            @OARequestBody({
+            @oaRequestBody({
               mediaType: OAMediaType.APPLICATION_XML,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
@@ -483,19 +483,19 @@ describe('OADocumentBuilder', function () {
 
         it('adds declared request body to the operation object', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
-            @OARequestBody({
+            @oaRequestBody({
               mediaType: OAMediaType.APPLICATION_JSON,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
               example: {foo: 'bar'},
               required: true,
             })
-            @OARequestBody({
+            @oaRequestBody({
               mediaType: OAMediaType.APPLICATION_XML,
               description: 'Request body description',
               schema: {type: OADataType.OBJECT},
@@ -540,7 +540,7 @@ describe('OADocumentBuilder', function () {
         it('ignores request body metadata if no operation declared', function () {
           class Target {
             operation(
-              @OARequestBody({
+              @oaRequestBody({
                 mediaType: OAMediaType.APPLICATION_JSON,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
@@ -548,7 +548,7 @@ describe('OADocumentBuilder', function () {
                 required: true,
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
-              @OARequestBody({
+              @oaRequestBody({
                 mediaType: OAMediaType.APPLICATION_XML,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
@@ -568,13 +568,13 @@ describe('OADocumentBuilder', function () {
 
         it('adds declared request body to the operation object', function () {
           class Target {
-            @OAOperation({
+            @oaOperation({
               method: OAOperationMethod.GET,
               path: '/operation',
               summary: 'Operation summary',
             })
             operation(
-              @OARequestBody({
+              @oaRequestBody({
                 mediaType: OAMediaType.APPLICATION_JSON,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
@@ -582,7 +582,7 @@ describe('OADocumentBuilder', function () {
                 required: true,
               }) // eslint-disable-next-line @typescript-eslint/no-unused-vars
               jsonBody: object,
-              @OARequestBody({
+              @oaRequestBody({
                 mediaType: OAMediaType.APPLICATION_XML,
                 description: 'Request body description',
                 schema: {type: OADataType.OBJECT},
@@ -628,14 +628,14 @@ describe('OADocumentBuilder', function () {
     describe('response', function () {
       it('ignores response metadata if no operation declared', function () {
         class Target {
-          @OAResponse({
+          @oaResponse({
             statusCode: 200,
             mediaType: OAMediaType.APPLICATION_JSON,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {foo: 'bar'},
           })
-          @OAResponse({
+          @oaResponse({
             statusCode: 200,
             mediaType: OAMediaType.APPLICATION_XML,
             description: 'Response description',
@@ -654,19 +654,19 @@ describe('OADocumentBuilder', function () {
 
       it('adds declared response to the operation object', function () {
         class Target {
-          @OAOperation({
+          @oaOperation({
             method: OAOperationMethod.GET,
             path: '/operation',
             summary: 'Operation summary',
           })
-          @OAResponse({
+          @oaResponse({
             statusCode: 200,
             mediaType: OAMediaType.APPLICATION_JSON,
             description: 'Response description',
             schema: {type: OADataType.OBJECT},
             example: {foo: 'bar'},
           })
-          @OAResponse({
+          @oaResponse({
             statusCode: 200,
             mediaType: OAMediaType.APPLICATION_XML,
             description: 'Response description',

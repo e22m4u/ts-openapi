@@ -1123,24 +1123,24 @@ __export(esm_exports, {
   OADataType: () => OADataType,
   OADocumentBuilder: () => OADocumentBuilder,
   OAMediaType: () => OAMediaType,
-  OAOperation: () => OAOperation,
   OAOperationMethod: () => OAOperationMethod,
   OAOperationReflector: () => OAOperationReflector,
-  OAParameter: () => OAParameter,
   OAParameterLocation: () => OAParameterLocation,
   OAParameterReflector: () => OAParameterReflector,
-  OARequestBody: () => OARequestBody,
   OARequestBodyReflector: () => OARequestBodyReflector,
-  OAResponse: () => OAResponse,
   OAResponseReflector: () => OAResponseReflector,
   OASecuritySchemeType: () => OASecuritySchemeType,
-  OATag: () => OATag,
   OATagReflector: () => OATagReflector,
   OA_OPERATIONS_METADATA_KEY: () => OA_OPERATIONS_METADATA_KEY,
   OA_PARAMETERS_METADATA_KEY: () => OA_PARAMETERS_METADATA_KEY,
   OA_REQUEST_BODIES_METADATA_KEY: () => OA_REQUEST_BODIES_METADATA_KEY,
   OA_RESPONSES_METADATA_KEY: () => OA_RESPONSES_METADATA_KEY,
-  OA_TAG_METADATA_KEY: () => OA_TAG_METADATA_KEY
+  OA_TAG_METADATA_KEY: () => OA_TAG_METADATA_KEY,
+  oaOperation: () => oaOperation,
+  oaParameter: () => oaParameter,
+  oaRequestBody: () => oaRequestBody,
+  oaResponse: () => oaResponse,
+  oaTag: () => oaTag
 });
 module.exports = __toCommonJS(esm_exports);
 
@@ -1378,11 +1378,11 @@ var OATagReflector = class {
 };
 
 // dist/esm/decorators/tag/tag-decorator.js
-function OATag(options) {
+function oaTag(options) {
   return function(target) {
     const decoratorType = getDecoratorTargetType(target);
     if (decoratorType !== DecoratorTargetType.CONSTRUCTOR)
-      throw new Error("@OATag decorator is only supported on a class.");
+      throw new Error("@oaTag decorator is only supported on a class.");
     const nameByOptions = options == null ? void 0 : options.name;
     const nameByClass = target.name.replace(/controller$/i, "");
     const metadata = {
@@ -1426,11 +1426,11 @@ var OAResponseReflector = class {
 };
 
 // dist/esm/decorators/response/response-decorator.js
-function OAResponse(metadata) {
+function oaResponse(metadata) {
   return function(target, propertyKey, descriptor) {
     const decoratorType = getDecoratorTargetType(target, propertyKey, descriptor);
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD)
-      throw new Error("@OAResponse decorator is only supported on an instance method.");
+      throw new Error("@oaResponse decorator is only supported on an instance method.");
     OAResponseReflector.setMetadata(metadata, target.constructor, propertyKey);
   };
 }
@@ -1468,11 +1468,11 @@ var OAParameterReflector = class {
 };
 
 // dist/esm/decorators/parameter/parameter-decorator.js
-function OAParameter(metadata) {
+function oaParameter(metadata) {
   return function(target, propertyKey, indexOrDescriptor) {
     const decoratorType = getDecoratorTargetType(target, propertyKey, indexOrDescriptor);
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD && decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER) {
-      throw new Error("@OAParameter decorator is only supported on an instance method or an instance method parameter.");
+      throw new Error("@oaParameter decorator is only supported on an instance method or an instance method parameter.");
     }
     OAParameterReflector.setMetadata(metadata, target.constructor, propertyKey);
   };
@@ -1508,11 +1508,11 @@ var OAOperationReflector = class {
 };
 
 // dist/esm/decorators/operation/operation-decorator.js
-function OAOperation(metadata) {
+function oaOperation(metadata) {
   return function(target, propertyKey, descriptor) {
     const decoratorType = getDecoratorTargetType(target, propertyKey, descriptor);
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD)
-      throw new Error("@OAOperation decorator is only supported on an instance method.");
+      throw new Error("@oaOperation decorator is only supported on an instance method.");
     OAOperationReflector.setMetadata(metadata, target.constructor, propertyKey);
   };
 }
@@ -1550,11 +1550,11 @@ var OARequestBodyReflector = class {
 };
 
 // dist/esm/decorators/request-body/request-body-decorator.js
-function OARequestBody(metadata) {
+function oaRequestBody(metadata) {
   return function(target, propertyKey, indexOrDescriptor) {
     const decoratorType = getDecoratorTargetType(target, propertyKey, indexOrDescriptor);
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD && decoratorType !== DecoratorTargetType.INSTANCE_METHOD_PARAMETER) {
-      throw new Error("@OARequestBody decorator is only supported on an instance method or an instance method parameter.");
+      throw new Error("@oaRequestBody decorator is only supported on an instance method or an instance method parameter.");
     }
     OARequestBodyReflector.setMetadata(metadata, target.constructor, propertyKey);
   };
@@ -1611,41 +1611,41 @@ var OADocumentBuilder = class {
     const operationMdMap = OAOperationReflector.getMetadata(target);
     operationMdMap.forEach((operationMd, methodName) => {
       var _a2, _b2, _c, _d, _e, _f;
-      const oaOperation = cloneDeep(operationMd);
-      delete oaOperation.path;
-      delete oaOperation.method;
+      const oaOperation2 = cloneDeep(operationMd);
+      delete oaOperation2.path;
+      delete oaOperation2.method;
       if (tagName != null) {
-        oaOperation.tags = (_a2 = oaOperation.tags) != null ? _a2 : [];
-        oaOperation.tags.push(tagName);
+        oaOperation2.tags = (_a2 = oaOperation2.tags) != null ? _a2 : [];
+        oaOperation2.tags.push(tagName);
       }
       const operationPath = import_path.default.join("/", tagPath, operationMd.path).replace(/\/$/, "") || "/";
       this.doc.paths = (_b2 = this.doc.paths) != null ? _b2 : {};
       this.doc.paths[operationPath] = (_c = this.doc.paths[operationPath]) != null ? _c : {};
       const oaPathItem = this.doc.paths[operationPath];
-      oaPathItem[operationMd.method] = oaOperation;
+      oaPathItem[operationMd.method] = oaOperation2;
       const parametersMdMap = OAParameterReflector.getMetadata(target);
       const parametersMd = parametersMdMap.get(methodName);
       if (parametersMd)
         parametersMd.reverse().forEach((parameterMd) => {
           var _a3;
-          oaOperation.parameters = (_a3 = oaOperation.parameters) != null ? _a3 : [];
+          oaOperation2.parameters = (_a3 = oaOperation2.parameters) != null ? _a3 : [];
           const required = parameterMd.in === OAParameterLocation.PATH || parameterMd.required;
-          oaOperation.parameters.push({ ...parameterMd, required });
+          oaOperation2.parameters.push({ ...parameterMd, required });
         });
       const requestBodiesMdMap = OARequestBodyReflector.getMetadata(target);
       const requestBodiesMd = requestBodiesMdMap.get(methodName);
       if (requestBodiesMd) {
         oaPathItem[operationMd.method] = (_d = oaPathItem[operationMd.method]) != null ? _d : {};
-        const oaOperation2 = oaPathItem[operationMd.method];
+        const oaOperation3 = oaPathItem[operationMd.method];
         requestBodiesMd.reverse().forEach((requestBodyMd) => {
           var _a3;
-          oaOperation2.requestBody = (_a3 = oaOperation2.requestBody) != null ? _a3 : {
+          oaOperation3.requestBody = (_a3 = oaOperation3.requestBody) != null ? _a3 : {
             description: requestBodyMd.description,
             content: {},
             required: requestBodyMd.required
           };
-          const oaRequestBody = oaOperation2.requestBody;
-          oaRequestBody.content[requestBodyMd.mediaType] = {
+          const oaRequestBody2 = oaOperation3.requestBody;
+          oaRequestBody2.content[requestBodyMd.mediaType] = {
             schema: requestBodyMd.schema,
             example: requestBodyMd.example
           };
@@ -1655,18 +1655,18 @@ var OADocumentBuilder = class {
       const responsesMd = responsesMdMap.get(methodName);
       if (responsesMd) {
         oaPathItem[operationMd.method] = (_e = oaPathItem[operationMd.method]) != null ? _e : {};
-        const oaOperation2 = oaPathItem[operationMd.method];
-        oaOperation2.responses = (_f = oaOperation2.responses) != null ? _f : {};
-        const oaResponses = oaOperation2.responses;
+        const oaOperation3 = oaPathItem[operationMd.method];
+        oaOperation3.responses = (_f = oaOperation3.responses) != null ? _f : {};
+        const oaResponses = oaOperation3.responses;
         responsesMd.reverse().forEach((responseMd) => {
           var _a3, _b3;
           const statusCode = responseMd.statusCode ? String(responseMd.statusCode) : "default";
           oaResponses[statusCode] = (_a3 = oaResponses[statusCode]) != null ? _a3 : {
             description: responseMd.description
           };
-          const oaResponse = oaResponses[statusCode];
-          oaResponse.content = (_b3 = oaResponse.content) != null ? _b3 : {};
-          const oaContent = oaResponse.content;
+          const oaResponse2 = oaResponses[statusCode];
+          oaResponse2.content = (_b3 = oaResponse2.content) != null ? _b3 : {};
+          const oaContent = oaResponse2.content;
           oaContent[responseMd.mediaType] = {
             schema: responseMd.schema,
             example: responseMd.example
@@ -1684,24 +1684,24 @@ var OADocumentBuilder = class {
   OADataType,
   OADocumentBuilder,
   OAMediaType,
-  OAOperation,
   OAOperationMethod,
   OAOperationReflector,
-  OAParameter,
   OAParameterLocation,
   OAParameterReflector,
-  OARequestBody,
   OARequestBodyReflector,
-  OAResponse,
   OAResponseReflector,
   OASecuritySchemeType,
-  OATag,
   OATagReflector,
   OA_OPERATIONS_METADATA_KEY,
   OA_PARAMETERS_METADATA_KEY,
   OA_REQUEST_BODIES_METADATA_KEY,
   OA_RESPONSES_METADATA_KEY,
-  OA_TAG_METADATA_KEY
+  OA_TAG_METADATA_KEY,
+  oaOperation,
+  oaParameter,
+  oaRequestBody,
+  oaResponse,
+  oaTag
 });
 /*! Bundled license information:
 

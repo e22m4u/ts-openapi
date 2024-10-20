@@ -12,13 +12,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { OATag } from './decorators/index.js';
+import { oaTag } from './decorators/index.js';
 import { OADataType } from './document-types.js';
 import { OAMediaType } from './document-types.js';
-import { OAResponse } from './decorators/index.js';
-import { OAOperation } from './decorators/index.js';
-import { OAParameter } from './decorators/index.js';
-import { OARequestBody } from './decorators/index.js';
+import { oaResponse } from './decorators/index.js';
+import { oaOperation } from './decorators/index.js';
+import { oaParameter } from './decorators/index.js';
+import { oaRequestBody } from './decorators/index.js';
 import { OAOperationMethod } from './document-types.js';
 import { OADocumentBuilder } from './document-builder.js';
 import { OAParameterLocation } from './document-types.js';
@@ -62,7 +62,7 @@ describe('OADocumentBuilder', function () {
                 let Target = class Target {
                 };
                 Target = __decorate([
-                    OATag({ name: 'Tag' })
+                    oaTag({ name: 'Tag' })
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -76,7 +76,7 @@ describe('OADocumentBuilder', function () {
                 let Target = class Target {
                 };
                 Target = __decorate([
-                    OATag()
+                    oaTag()
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -90,7 +90,7 @@ describe('OADocumentBuilder', function () {
                 let UserController = class UserController {
                 };
                 UserController = __decorate([
-                    OATag()
+                    oaTag()
                 ], UserController);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(UserController);
@@ -104,7 +104,7 @@ describe('OADocumentBuilder', function () {
                 let Target = class Target {
                 };
                 Target = __decorate([
-                    OATag({ name: 'UserController' })
+                    oaTag({ name: 'UserController' })
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -118,7 +118,7 @@ describe('OADocumentBuilder', function () {
                 let Target = class Target {
                 };
                 Target = __decorate([
-                    OATag({ name: 'Tag', path: '/path' })
+                    oaTag({ name: 'Tag', path: '/path' })
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -137,7 +137,7 @@ describe('OADocumentBuilder', function () {
                     }
                 }
                 __decorate([
-                    OAOperation({
+                    oaOperation({
                         method: OAOperationMethod.GET,
                         path: '/operation',
                         summary: 'Operation summary',
@@ -167,7 +167,7 @@ describe('OADocumentBuilder', function () {
                     }
                 };
                 __decorate([
-                    OAOperation({
+                    oaOperation({
                         method: OAOperationMethod.GET,
                         path: '/operation',
                         summary: 'Operation summary',
@@ -177,7 +177,7 @@ describe('OADocumentBuilder', function () {
                     __metadata("design:returntype", void 0)
                 ], Target.prototype, "operation", null);
                 Target = __decorate([
-                    OATag()
+                    oaTag()
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -202,7 +202,7 @@ describe('OADocumentBuilder', function () {
                     }
                 };
                 __decorate([
-                    OAOperation({
+                    oaOperation({
                         method: OAOperationMethod.GET,
                         path: '/operation',
                         summary: 'Operation summary',
@@ -212,7 +212,7 @@ describe('OADocumentBuilder', function () {
                     __metadata("design:returntype", void 0)
                 ], Target.prototype, "operation", null);
                 Target = __decorate([
-                    OATag({ path: '/tag' })
+                    oaTag({ path: '/tag' })
                 ], Target);
                 const builder = new OADocumentBuilder(DUMMY_DOC);
                 builder.useClassMetadata(Target);
@@ -240,12 +240,12 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAParameter({
+                        oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.STRING },
                         }),
-                        OAParameter({
+                        oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.NUMBER },
@@ -266,17 +266,17 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        OAParameter({
+                        oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.STRING },
                         }),
-                        OAParameter({
+                        oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.NUMBER },
@@ -318,17 +318,17 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        OAParameter({
+                        oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.PATH,
                             schema: { type: OADataType.STRING },
                         }),
-                        OAParameter({
+                        oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.PATH,
                             schema: { type: OADataType.NUMBER },
@@ -376,12 +376,12 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        __param(0, OAParameter({
+                        __param(0, oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.STRING },
                         })),
-                        __param(1, OAParameter({
+                        __param(1, oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.NUMBER },
@@ -404,17 +404,17 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        __param(0, OAParameter({
+                        __param(0, oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.STRING },
                         })),
-                        __param(1, OAParameter({
+                        __param(1, oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.QUERY,
                             schema: { type: OADataType.NUMBER },
@@ -458,17 +458,17 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        __param(0, OAParameter({
+                        __param(0, oaParameter({
                             name: 'param1',
                             in: OAParameterLocation.PATH,
                             schema: { type: OADataType.STRING },
                         })),
-                        __param(1, OAParameter({
+                        __param(1, oaParameter({
                             name: 'param2',
                             in: OAParameterLocation.PATH,
                             schema: { type: OADataType.NUMBER },
@@ -516,14 +516,14 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OARequestBody({
+                        oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         }),
-                        OARequestBody({
+                        oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
@@ -546,19 +546,19 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        OARequestBody({
+                        oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         }),
-                        OARequestBody({
+                        oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
@@ -608,14 +608,14 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        __param(0, OARequestBody({
+                        __param(0, oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         })),
-                        __param(1, OARequestBody({
+                        __param(1, oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
@@ -640,19 +640,19 @@ describe('OADocumentBuilder', function () {
                         }
                     }
                     __decorate([
-                        OAOperation({
+                        oaOperation({
                             method: OAOperationMethod.GET,
                             path: '/operation',
                             summary: 'Operation summary',
                         }),
-                        __param(0, OARequestBody({
+                        __param(0, oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_JSON,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
                             example: { foo: 'bar' },
                             required: true,
                         })),
-                        __param(1, OARequestBody({
+                        __param(1, oaRequestBody({
                             mediaType: OAMediaType.APPLICATION_XML,
                             description: 'Request body description',
                             schema: { type: OADataType.OBJECT },
@@ -701,14 +701,14 @@ describe('OADocumentBuilder', function () {
                     }
                 }
                 __decorate([
-                    OAResponse({
+                    oaResponse({
                         statusCode: 200,
                         mediaType: OAMediaType.APPLICATION_JSON,
                         description: 'Response description',
                         schema: { type: OADataType.OBJECT },
                         example: { foo: 'bar' },
                     }),
-                    OAResponse({
+                    oaResponse({
                         statusCode: 200,
                         mediaType: OAMediaType.APPLICATION_XML,
                         description: 'Response description',
@@ -731,19 +731,19 @@ describe('OADocumentBuilder', function () {
                     }
                 }
                 __decorate([
-                    OAOperation({
+                    oaOperation({
                         method: OAOperationMethod.GET,
                         path: '/operation',
                         summary: 'Operation summary',
                     }),
-                    OAResponse({
+                    oaResponse({
                         statusCode: 200,
                         mediaType: OAMediaType.APPLICATION_JSON,
                         description: 'Response description',
                         schema: { type: OADataType.OBJECT },
                         example: { foo: 'bar' },
                     }),
-                    OAResponse({
+                    oaResponse({
                         statusCode: 200,
                         mediaType: OAMediaType.APPLICATION_XML,
                         description: 'Response description',

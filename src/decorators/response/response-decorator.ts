@@ -10,7 +10,7 @@ import {getDecoratorTargetType} from '@e22m4u/ts-reflector';
  *
  * @param metadata
  */
-export function OAResponse<T extends object>(metadata: OAResponseMetadata) {
+export function oaResponse<T extends object>(metadata: OAResponseMetadata) {
   return function (
     target: Prototype<T>,
     propertyKey: string,
@@ -23,7 +23,7 @@ export function OAResponse<T extends object>(metadata: OAResponseMetadata) {
     );
     if (decoratorType !== DecoratorTargetType.INSTANCE_METHOD)
       throw new Error(
-        '@OAResponse decorator is only supported on an instance method.',
+        '@oaResponse decorator is only supported on an instance method.',
       );
     OAResponseReflector.setMetadata(
       metadata,
