@@ -29,8 +29,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // dist/esm/index.js
-var esm_exports = {};
-__export(esm_exports, {
+var index_exports = {};
+__export(index_exports, {
   OAApiKeyLocation: () => OAApiKeyLocation,
   OADataFormat: () => OADataFormat,
   OADataType: () => OADataType,
@@ -55,7 +55,7 @@ __export(esm_exports, {
   oaResponse: () => oaResponse,
   oaTag: () => oaTag
 });
-module.exports = __toCommonJS(esm_exports);
+module.exports = __toCommonJS(index_exports);
 
 // dist/esm/document-types.js
 var OAOperationMethod;
