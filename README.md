@@ -31,12 +31,15 @@ for class, methods and parameters.
 ```ts
 import {
   oaTag,
-  OADataType,
   oaResponse,
   oaOperation,
   oaParameter,
-  OAMediaType,
   oaRequestBody,
+} from '@e22m4u/ts-openapi';
+
+import {
+  OADataType,
+  OAMediaType,
   OAOperationMethod,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
@@ -240,8 +243,8 @@ Describes an operation response.
 
 ```ts
 import {
-  OADataType,
   oaResponse,
+  OADataType,
   OAMediaType,
 } from '@e22m4u/ts-openapi';
 

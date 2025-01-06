@@ -31,12 +31,15 @@ npm install @e22m4u/ts-openapi
 ```ts
 import {
   oaTag,
-  OADataType,
   oaResponse,
   oaOperation,
   oaParameter,
-  OAMediaType,
   oaRequestBody,
+} from '@e22m4u/ts-openapi';
+
+import {
+  OADataType,
+  OAMediaType,
   OAOperationMethod,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
@@ -239,8 +242,8 @@ class UserController {
 
 ```ts
 import {
-  OADataType,
   oaResponse,
+  OADataType,
   OAMediaType,
 } from '@e22m4u/ts-openapi';
 
