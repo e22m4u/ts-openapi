@@ -30,13 +30,13 @@ for class, methods and parameters.
 
 ```ts
 import {
-  OATag,
+  oaTag,
   OADataType,
-  OAResponse,
-  OAOperation,
-  OAParameter,
+  oaResponse,
+  oaOperation,
+  oaParameter,
   OAMediaType,
-  OARequestBody,
+  oaRequestBody,
   OAOperationMethod,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
@@ -47,16 +47,16 @@ type User = {
   email: string,
 }
 
-@OATag({
+@oaTag({
   name: 'User',
   path: '/user',
 })
 class UserController {
-  @OAOperation({
+  @oaOperation({
     method: OAOperationMethod.PATCH,
     path: '/{id}',
   })
-  @OAResponse({
+  @oaResponse({
     mediaType: OAMediaType.JSON,
     description: 'Patched User',
     schema: {
@@ -69,13 +69,13 @@ class UserController {
     },
   })
   patchById(
-    @OAParameter({
+    @oaParameter({
       name: 'id',
       in: OAParameterLocation.PATH,
       schema: {type: OADataType.NUMBER},
     })
     id: string,
-    @OARequestBody({
+    @oaRequestBody({
       mediaType: OAMediaType.JSON,
       schema: {
         type: OADataType.OBJECT,
@@ -182,14 +182,14 @@ described in the given controller.
 
 ## Decorators
 
-### @OATag
+### @oaTag
 
 Describes a group of controller operations.
 
 ```ts
-import {OATag} from '@e22m4u/ts-openapi';
+import {oaTag} from '@e22m4u/ts-openapi';
 
-@OATag({
+@oaTag({
   name: 'User',
   description: 'The User Controller',
   // the "path" parameter is used as
@@ -205,18 +205,18 @@ class UserController {/* ... */}
 Specification:
 - [Tag Object](https://spec.openapis.org/oas/v3.1.0#tag-object)
 
-### @OAOperation
+### @oaOperation
 
 Describes an operation for a specific route.
 
 ```ts
 import {
-  OAOperation,
+  oaOperation,
   OAOperationMethod,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  @OAOperation({
+  @oaOperation({
     method: OAOperationMethod.GET,
     path: '/users/{id}',
     summary: 'Find by the given id',
@@ -234,19 +234,19 @@ Specification:
 - [Path Item Object](https://spec.openapis.org/oas/v3.1.0#path-item-object)  
 - [Operation Object](https://spec.openapis.org/oas/v3.1.0#operation-object)
 
-### @OAResponse
+### @oaResponse
 
 Describes an operation response.
 
 ```ts
 import {
   OADataType,
-  OAResponse,
+  oaResponse,
   OAMediaType,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  @OAResponse({
+  @oaResponse({
     statusCode: 200,
     mediaType: OAMediaType.JSON,
     description: 'Response description',
@@ -274,28 +274,28 @@ Specification:
 - [Response Object](https://spec.openapis.org/oas/v3.1.0#response-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
-### @OAParameter
+### @oaParameter
 
 Describes an operation parameter.
 
 ```ts
 import {
   OADataType,
-  OAParameter,
+  oaParameter,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
   // the decorator can be
   // applied to the method
-  @OAParameter({
+  @oaParameter({
     name: 'foo',
     in: OAParameterLocation.QUERY,
     schema: {type: OADataType.STRING},
   })
   findById(
     // or directly to the parameter
-    @OAParameter({
+    @oaParameter({
       name: 'bar',
       in: OAParameterLocation.QUERY,
       schema: {type: OADataType.STRING},
@@ -311,7 +311,7 @@ Specification:
 - [Parameter Object](https://spec.openapis.org/oas/v3.1.0#parameter-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
-### @OARequestBody
+### @oaRequestBody
 
 Describes a request body.
 
@@ -319,13 +319,13 @@ Describes a request body.
 import {
   OADataType,
   OAMediaType,
-  OARequestBody,
+  oaRequestBody,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
   // the decorator can be
   // applied to the method
-  @OARequestBody({
+  @oaRequestBody({
     mediaType: OAMediaType.JSON,
     schema: {
       type: OADataType.OBJECT,
@@ -337,7 +337,7 @@ class UserController {
   })
   create(
     // or directly to the parameter
-    @OARequestBody({
+    @oaRequestBody({
       mediaType: OAMediaType.JSON,
       schema: {
         type: OADataType.OBJECT,

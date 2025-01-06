@@ -30,13 +30,13 @@ npm install @e22m4u/ts-openapi
 
 ```ts
 import {
-  OATag,
+  oaTag,
   OADataType,
-  OAResponse,
-  OAOperation,
-  OAParameter,
+  oaResponse,
+  oaOperation,
+  oaParameter,
   OAMediaType,
-  OARequestBody,
+  oaRequestBody,
   OAOperationMethod,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
@@ -47,16 +47,16 @@ type User = {
   email: string,
 }
 
-@OATag({
+@oaTag({
   name: 'User',
   path: '/user',
 })
 class UserController {
-  @OAOperation({
+  @oaOperation({
     method: OAOperationMethod.PATCH,
     path: '/{id}',
   })
-  @OAResponse({
+  @oaResponse({
     mediaType: OAMediaType.JSON,
     description: 'Patched User',
     schema: {
@@ -69,13 +69,13 @@ class UserController {
     },
   })
   patchById(
-    @OAParameter({
+    @oaParameter({
       name: 'id',
       in: OAParameterLocation.PATH,
       schema: {type: OADataType.NUMBER},
     })
     id: string,
-    @OARequestBody({
+    @oaRequestBody({
       mediaType: OAMediaType.JSON,
       schema: {
         type: OADataType.OBJECT,
@@ -181,14 +181,14 @@ console.log(doc);
 
 ## Декораторы
 
-### @OATag
+### @oaTag
 
 Описывает группу операций контроллера.
 
 ```ts
-import {OATag} from '@e22m4u/ts-openapi';
+import {oaTag} from '@e22m4u/ts-openapi';
 
-@OATag({
+@oaTag({
   name: 'User',
   description: 'The User Controller',
   // параметр "path" используется как
@@ -204,18 +204,18 @@ class UserController {/* ... */}
 Спецификация:
 - [Tag Object](https://spec.openapis.org/oas/v3.1.0#tag-object)
 
-### @OAOperation
+### @oaOperation
 
 Описывает операцию определенного маршрута.
 
 ```ts
 import {
-  OAOperation,
+  oaOperation,
   OAOperationMethod,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  @OAOperation({
+  @oaOperation({
     method: OAOperationMethod.GET,
     path: '/users/{id}',
     summary: 'Find by the given id',
@@ -233,19 +233,19 @@ class UserController {
 - [Path Item Object](https://spec.openapis.org/oas/v3.1.0#path-item-object)  
 - [Operation Object](https://spec.openapis.org/oas/v3.1.0#operation-object)
 
-### @OAResponse
+### @oaResponse
 
 Описывает возвращаемый ответ операции.
 
 ```ts
 import {
   OADataType,
-  OAResponse,
+  oaResponse,
   OAMediaType,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  @OAResponse({
+  @oaResponse({
     statusCode: 200,
     mediaType: OAMediaType.JSON,
     description: 'Response description',
@@ -273,21 +273,21 @@ class UserController {
 - [Response Object](https://spec.openapis.org/oas/v3.1.0#response-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
-### @OAParameter
+### @oaParameter
 
 Описывает параметр операции.
 
 ```ts
 import {
   OADataType,
-  OAParameter,
+  oaParameter,
   OAParameterLocation,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
   // декоратор параметра можно
   // применить к методу
-  @OAParameter({
+  @oaParameter({
     name: 'foo',
     in: OAParameterLocation.QUERY,
     schema: {type: OADataType.STRING},
@@ -295,7 +295,7 @@ class UserController {
   findById(
     // или непосредственно
     // к нужному параметру
-    @OAParameter({
+    @oaParameter({
       name: 'bar',
       in: OAParameterLocation.QUERY,
       schema: {type: OADataType.STRING},
@@ -311,7 +311,7 @@ class UserController {
 - [Parameter Object](https://spec.openapis.org/oas/v3.1.0#parameter-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
-### @OARequestBody
+### @oaRequestBody
 
 Описывает тело принимаемого запроса.
 
@@ -319,13 +319,13 @@ class UserController {
 import {
   OADataType,
   OAMediaType,
-  OARequestBody,
+  oaRequestBody,
 } from '@e22m4u/ts-openapi';
 
 class UserController {
   // декоратор тела запроса
   // можно применить к методу
-  @OARequestBody({
+  @oaRequestBody({
     mediaType: OAMediaType.JSON,
     schema: {
       type: OADataType.OBJECT,
@@ -338,7 +338,7 @@ class UserController {
   create(
     // или непосредственно
     // к нужному параметру
-    @OARequestBody({
+    @oaRequestBody({
       mediaType: OAMediaType.JSON,
       schema: {
         type: OADataType.OBJECT,
