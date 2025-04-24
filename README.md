@@ -1,6 +1,6 @@
 ## @e22m4u/ts-openapi
 
-Набор TypeScript декораторов для генерации
+TypeScript декораторы для генерации
 [OpenAPI Документа 3.1.0](https://spec.openapis.org/oas/v3.1.0)
 
 ## Установка
