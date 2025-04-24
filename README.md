@@ -1,20 +1,18 @@
 ## @e22m4u/ts-openapi
 
-*English | [Русский](./README-ru.md)*
+Набор TypeScript декораторов для генерации
+[OpenAPI Документа 3.1.0](https://spec.openapis.org/oas/v3.1.0)
 
-TypeScript decorators for generating
-[The OpenAPI Document 3.1.0](https://spec.openapis.org/oas/v3.1.0)
-
-## Installation
+## Установка
 
 ```bash
 npm install @e22m4u/ts-openapi
 ```
 
-#### Decorators support
+#### Поддержка декораторов
 
-To enable decorators support add the following
-options to your `tsconfig.json` file.
+Для включения поддержки декораторов, добавьте указанные
+ниже опции в файл `tsconfig.json` вашего проекта.
 
 ```json
 {
@@ -23,10 +21,10 @@ options to your `tsconfig.json` file.
 }
 ```
 
-## Example
+## Пример
 
-Describing controller operations using [decorators](#Decorators)
-for class, methods and parameters.
+Описание операций контроллера с помощью [декораторов](#Декораторы)
+класса, методов и параметров.
 
 ```ts
 import {
@@ -95,8 +93,8 @@ class UserController {
 }
 ```
 
-Generating the OpenAPI document using the controller
-class from previous example.
+Генерация OpenApi документа используя класс контроллера
+с размеченными мета-данными.
 
 ```ts
 import {OADocumentBuilder} from '@e22m4u/ts-openapi';
@@ -108,8 +106,7 @@ const doc = builder.build();
 console.log(doc);
 ```
 
-The `build` method returns the OpenAPI document
-described in the given controller.
+Результат работы метода `build` класса `OADocumentBuilder`
 
 ```json
 {
@@ -183,11 +180,11 @@ described in the given controller.
 }
 ```
 
-## Decorators
+## Декораторы
 
 ### @oaTag
 
-Describes a group of controller operations.
+Описывает группу операций контроллера.
 
 ```ts
 import {oaTag} from '@e22m4u/ts-openapi';
@@ -195,9 +192,9 @@ import {oaTag} from '@e22m4u/ts-openapi';
 @oaTag({
   name: 'User',
   description: 'The User Controller',
-  // the "path" parameter is used as
-  // a route prefix for operations
-  // of this controller
+  // параметр "path" используется как
+  // префикс маршрута для операций
+  // данного контроллера
   path: '/user',
 })
 class UserController {/* ... */}
@@ -205,12 +202,12 @@ class UserController {/* ... */}
 
 [OATagMetadata.ts](src/decorators/tag/tag-metadata.ts)
 
-Specification:
+Спецификация:
 - [Tag Object](https://spec.openapis.org/oas/v3.1.0#tag-object)
 
 ### @oaOperation
 
-Describes an operation for a specific route.
+Описывает операцию определенного маршрута.
 
 ```ts
 import {
@@ -232,14 +229,14 @@ class UserController {
 
 [OAOperationMetadata.ts](/src/decorators/operation/operation-metadata.ts)
 
-Specification:
+Спецификация:
 - [Paths Object](https://spec.openapis.org/oas/v3.1.0#paths-object)  
 - [Path Item Object](https://spec.openapis.org/oas/v3.1.0#path-item-object)  
 - [Operation Object](https://spec.openapis.org/oas/v3.1.0#operation-object)
 
 ### @oaResponse
 
-Describes an operation response.
+Описывает возвращаемый ответ операции.
 
 ```ts
 import {
@@ -272,14 +269,14 @@ class UserController {
 
 [OAResponseMetadata.ts](src/decorators/response/response-metadata.ts)
 
-Specification:
+Спецификация:
 - [Responses Object](https://spec.openapis.org/oas/v3.1.0#responses-object)  
 - [Response Object](https://spec.openapis.org/oas/v3.1.0#response-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
 ### @oaParameter
 
-Describes an operation parameter.
+Описывает параметр операции.
 
 ```ts
 import {
@@ -289,15 +286,16 @@ import {
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  // the decorator can be
-  // applied to the method
+  // декоратор параметра можно
+  // применить к методу
   @oaParameter({
     name: 'foo',
     in: OAParameterLocation.QUERY,
     schema: {type: OADataType.STRING},
   })
   findById(
-    // or directly to the parameter
+    // или непосредственно
+    // к нужному параметру
     @oaParameter({
       name: 'bar',
       in: OAParameterLocation.QUERY,
@@ -310,13 +308,13 @@ class UserController {
 
 [OAParameterMetadata.ts](src/decorators/parameter/parameter-metadata.ts)
 
-Specification:
+Спецификация:
 - [Parameter Object](https://spec.openapis.org/oas/v3.1.0#parameter-object)  
 - [Schema Object](https://spec.openapis.org/oas/v3.1.0#schema-object)
 
 ### @oaRequestBody
 
-Describes a request body.
+Описывает тело принимаемого запроса.
 
 ```ts
 import {
@@ -326,8 +324,8 @@ import {
 } from '@e22m4u/ts-openapi';
 
 class UserController {
-  // the decorator can be
-  // applied to the method
+  // декоратор тела запроса
+  // можно применить к методу
   @oaRequestBody({
     mediaType: OAMediaType.JSON,
     schema: {
@@ -339,7 +337,8 @@ class UserController {
     },
   })
   create(
-    // or directly to the parameter
+    // или непосредственно
+    // к нужному параметру
     @oaRequestBody({
       mediaType: OAMediaType.JSON,
       schema: {
@@ -357,15 +356,15 @@ class UserController {
 
 [OARequestBodyMetadata.ts](src/decorators/request-body/request-body-metadata.ts)
 
-Specification:
+Спецификация:
 - [Request Body Object](https://spec.openapis.org/oas/v3.1.0#request-body-object)
 
-## Tests
+## Тесты
 
 ```bash
 npm run test
 ```
 
-## License
+## Лицензия
 
 MIT
