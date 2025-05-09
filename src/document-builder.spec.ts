@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {describe} from 'mocha';
 import {oaTag} from './decorators/index.js';
 import {OADataType} from './document-types.js';
 import {OAMediaType} from './document-types.js';
@@ -199,7 +198,7 @@ describe('OADocumentBuilder', function () {
     });
 
     describe('parameter', function () {
-      describe('decorator applied to an instance method', () => {
+      describe('decorator applied to an instance method', function () {
         it('ignores parameters metadata if no operation declared', function () {
           class Target {
             @oaParameter({
@@ -454,7 +453,7 @@ describe('OADocumentBuilder', function () {
     });
 
     describe('request body', function () {
-      describe('decorator applied to an instance method', () => {
+      describe('decorator applied to an instance method', function () {
         it('ignores request body metadata if no operation declared', function () {
           class Target {
             @oaRequestBody({
