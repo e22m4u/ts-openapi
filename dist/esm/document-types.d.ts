@@ -145,10 +145,11 @@ export type OAReferenceObject = {
 export type OASchemaObject = {
     type?: OADataType;
     format?: OADataFormat;
-    items?: OASchemaObject;
+    items?: OASchemaObject | OAReferenceObject;
     required?: string[];
     minimum?: number;
     maximum?: number;
+    default?: unknown;
     properties?: OASchemaPropertiesObject;
     discriminator?: OADiscriminatorObject;
     xml?: OAXmlObject;
