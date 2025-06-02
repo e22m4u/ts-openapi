@@ -7,6 +7,10 @@ import { OAParameterReflector } from './decorators/index.js';
 import { OAOperationReflector } from './decorators/index.js';
 import { OARequestBodyReflector } from './decorators/index.js';
 /**
+ * OpenAPI version.
+ */
+export const OPENAPI_VERSION = '3.1.0';
+/**
  * Document builder.
  */
 export class OADocumentBuilder {
@@ -23,9 +27,9 @@ export class OADocumentBuilder {
      */
     constructor(doc) {
         // avoid argument mutation
-        this.doc = cloneDeep({ ...doc, openapi: '3.1.0' });
+        this.doc = cloneDeep({ ...doc, openapi: OPENAPI_VERSION });
         // force openapi version
-        this.doc.info.version = '3.1.0';
+        this.doc.info.version = OPENAPI_VERSION;
     }
     /**
      * Returns the OADocumentObject.

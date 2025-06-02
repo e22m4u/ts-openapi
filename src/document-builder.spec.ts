@@ -7,10 +7,10 @@ import {oaOperation} from './decorators/index.js';
 import {oaParameter} from './decorators/index.js';
 import {oaRequestBody} from './decorators/index.js';
 import {OAOperationMethod} from './document-types.js';
+import {OPENAPI_VERSION} from './document-builder.js';
 import {OADocumentBuilder} from './document-builder.js';
 import {OAParameterLocation} from './document-types.js';
 
-const OPENAPI_VERSION = '3.1.0';
 const DUMMY_DOC = {
   openapi: OPENAPI_VERSION,
   info: {

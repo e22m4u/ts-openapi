@@ -2,6 +2,10 @@ import { Flatten } from './types.js';
 import { Constructor } from './types.js';
 import { OADocumentObject } from './document-types.js';
 /**
+ * OpenAPI version.
+ */
+export declare const OPENAPI_VERSION = "3.1.0";
+/**
  * Document builder.
  */
 export declare class OADocumentBuilder {

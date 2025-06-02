@@ -49,6 +49,7 @@ __export(index_exports, {
   OA_REQUEST_BODIES_METADATA_KEY: () => OA_REQUEST_BODIES_METADATA_KEY,
   OA_RESPONSES_METADATA_KEY: () => OA_RESPONSES_METADATA_KEY,
   OA_TAG_METADATA_KEY: () => OA_TAG_METADATA_KEY,
+  OPENAPI_VERSION: () => OPENAPI_VERSION,
   oaOperation: () => oaOperation,
   oaParameter: () => oaParameter,
   oaRequestBody: () => oaRequestBody,
@@ -368,6 +369,7 @@ function oaRequestBody(metadata) {
 __name(oaRequestBody, "oaRequestBody");
 
 // dist/esm/document-builder.js
+var OPENAPI_VERSION = "3.1.0";
 var _OADocumentBuilder = class _OADocumentBuilder {
   /**
    * Open Api Document.
@@ -381,8 +383,8 @@ var _OADocumentBuilder = class _OADocumentBuilder {
    * @param doc
    */
   constructor(doc) {
-    this.doc = cloneDeep({ ...doc, openapi: "3.1.0" });
-    this.doc.info.version = "3.1.0";
+    this.doc = cloneDeep({ ...doc, openapi: OPENAPI_VERSION });
+    this.doc.info.version = OPENAPI_VERSION;
   }
   /**
    * Returns the OADocumentObject.
@@ -506,6 +508,7 @@ var OADocumentBuilder = _OADocumentBuilder;
   OA_REQUEST_BODIES_METADATA_KEY,
   OA_RESPONSES_METADATA_KEY,
   OA_TAG_METADATA_KEY,
+  OPENAPI_VERSION,
   oaOperation,
   oaParameter,
   oaRequestBody,
