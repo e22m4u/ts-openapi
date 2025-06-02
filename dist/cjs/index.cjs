@@ -384,7 +384,6 @@ var _OADocumentBuilder = class _OADocumentBuilder {
    */
   constructor(doc) {
     this.doc = cloneDeep({ ...doc, openapi: OPENAPI_VERSION });
-    this.doc.info.version = OPENAPI_VERSION;
   }
   /**
    * Returns the OADocumentObject.

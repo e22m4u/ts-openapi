@@ -38,8 +38,6 @@ export class OADocumentBuilder {
   constructor(doc: Flatten<Omit<OADocumentObject, 'openapi'>>) {
     // avoid argument mutation
     this.doc = cloneDeep({...doc, openapi: OPENAPI_VERSION});
-    // force openapi version
-    this.doc.info.version = OPENAPI_VERSION;
   }
 
   /**
