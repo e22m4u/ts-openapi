@@ -156,7 +156,7 @@ export type OAReferenceObject = {
  * https://spec.openapis.org/oas/v3.1.0#schema-object
  */
 export type OASchemaObject = {
-  type: OADataType;
+  type?: OADataType;
   format?: OADataFormat;
   items?: OASchemaObject;
   required?: string[];
