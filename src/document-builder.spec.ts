@@ -703,6 +703,49 @@ describe('OADocumentBuilder', function () {
           },
         });
       });
+
+      it('uses default status code if not specified', function () {
+        class Target {
+          @oaOperation({
+            method: OAOperationMethod.GET,
+            path: '/operation',
+            summary: 'Operation summary',
+          })
+          @oaResponse({
+            mediaType: OAMediaType.APPLICATION_JSON,
+            description: 'Response description',
+            schema: {type: OADataType.OBJECT},
+            example: {foo: 'bar'},
+          })
+          operation() {
+            /**/
+          }
+        }
+        const builder = new OADocumentBuilder(DUMMY_DOC);
+        builder.useClassMetadata(Target);
+        const res = builder.build();
+        expect(res).to.be.eql({
+          ...DUMMY_DOC,
+          paths: {
+            '/operation': {
+              get: {
+                summary: 'Operation summary',
+                responses: {
+                  default: {
+                    description: 'Response description',
+                    content: {
+                      [OAMediaType.APPLICATION_JSON]: {
+                        schema: {type: OADataType.OBJECT},
+                        example: {foo: 'bar'},
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        });
+      });
     });
   });
 });
