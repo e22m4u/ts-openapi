@@ -118,6 +118,9 @@ export type OAParameterObject = {
     explode?: boolean;
     allowReserved?: boolean;
     schema?: OASchemaObject;
+    content?: {
+        [mediaType: string]: OAMediaTypeObject;
+    };
 };
 /**
  * Parameter Location.
