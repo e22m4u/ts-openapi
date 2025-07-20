@@ -39,7 +39,7 @@
     "test:coverage": "npm run lint && c8 --reporter=text mocha --bail",
     "prepare": "husky"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@e22m4u/ts-reflector": "~0.1.0"
   },
   "devDependencies": {
