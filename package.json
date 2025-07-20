@@ -1,6 +1,6 @@
 {
   "name": "@e22m4u/ts-openapi",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "TypeScript декораторы для генерации OpenAPI документа",
   "author": "e22m4u <e22m4u@yandex.ru>",
   "license": "MIT",
